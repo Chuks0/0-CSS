@@ -58,7 +58,7 @@ const months = [
 
 const eventsArr = []; // pre fill with time slots
 let weekSlotsArr;
-let minSetVal = 1;
+let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
 console.log(eventsArr);
