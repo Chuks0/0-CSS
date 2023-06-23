@@ -281,7 +281,7 @@ function updateEvents(day) {
             break;
 
         default:
-            events = min30(day);
+            events = min60(day);
             break;
     }
 
