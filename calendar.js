@@ -269,7 +269,7 @@ function updateEvents(day) {
     weekSlotsArr = setWeekSlotArr();
 
     let events = "";
-    switch (minSet) {
+    switch (minSetVal) {
         case 1:
             events = min30(day);
             break;
