@@ -8,15 +8,15 @@ const calendar = document.querySelector(".calendar"),
     dateInput = document.querySelector(".date-input"),
     eventDay = document.querySelector(".event-day"),
     eventDate = document.querySelector(".event-date"),
-    eventsContainer = document.querySelector(".events"),
+    //eventsContainer = document.querySelector(".events"),
     addEventBtn = document.querySelector(".add-event"),
     addEventWrapper = document.querySelector(".add-event-wrapper "),
     addEventCloseBtn = document.querySelector(".close "),
     addEventTitle = document.querySelector(".event-name "),
     addEventFrom = document.querySelector(".event-time-from "),
     addEventTo = document.querySelector(".event-time-to "),
+    //selectDate = document.querySelector(".today-date"),
     addEventSubmit = document.querySelector(".add-event-btn ");
-//selectDate = document.querySelector(".today-date")
 let today = new Date();
 let activeDay;
 let month = today.getMonth();
@@ -340,7 +340,7 @@ function updateEvents(day) {
         </div>`;
     }*/
     console.log(date);
-    eventsContainer.innerHTML = events;
+    //eventsContainer.innerHTML = events;
     saveEvents();
 }
 
@@ -457,15 +457,15 @@ function dateCheck(day, i, end, e) {
     addEventWrapper.classList.toggle("active");
 });*/
 
-addEventCloseBtn.addEventListener("click", () => {
+/*addEventCloseBtn.addEventListener("click", () => {
     addEventWrapper.classList.remove("active");
-});
+});*/
 
-document.addEventListener("click", (e) => {
+/*document.addEventListener("click", (e) => {
     if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
         addEventWrapper.classList.remove("active");
     }
-});
+});*/
 
 //allow 50 chars in eventtitle
 //addEventTitle.addEventListener("input", (e) => {
@@ -514,7 +514,7 @@ addEventTo.addEventListener("input", (e) => {
 });*/
 
 //function to add event to eventsArr
-addEventSubmit.addEventListener("click", () => {
+/*addEventSubmit.addEventListener("click", () => {
     const eventTitle = addEventTitle.value;
     const eventTimeFrom = addEventFrom.value;
     const eventTimeTo = addEventTo.value;
@@ -601,10 +601,10 @@ addEventSubmit.addEventListener("click", () => {
     if (!activeDayEl.classList.contains("event")) {
         activeDayEl.classList.add("event");
     }
-});
+});*/
 
 //function to delete event when clicked on event
-eventsContainer.addEventListener("click", (e) => {
+/*eventsContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("event")) {
         //if client book the time
         if (confirm("Are you sure you want to delete this event?")) {
@@ -635,7 +635,7 @@ eventsContainer.addEventListener("click", (e) => {
             //updateEvents(activeDay);
         }
     }
-});
+});*/
 
 //function to save events in local storage
 function saveEvents() {
@@ -667,9 +667,9 @@ function openPage(day) {
     updateEvents(day);
 }
 
-selectDate.addEventListener("change", (e) => {
+/*selectDate.addEventListener("change", (e) => {
     updateEvents(e.target.value);
-});
+});*/
 
 function minSet(val) {
     minSetVal = val;
