@@ -63,7 +63,7 @@ getEvents();
 console.log(eventsArr);
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
-function initCalendar() {
+function initCalendar(setTodayAsActive = true) {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const prevLastDay = new Date(year, month, 0);
@@ -106,9 +106,13 @@ function initCalendar() {
             //getActiveDay(i);
             openPage(today.getDay());
             if (event) {
-                days += `<div class="day today active event">${i}</div>`;
+                days += setTodayAsActive
+                    ? `<div class="day today active event">${i}</div>`
+                    : `<div class="day today event">${i}</div>`;
             } else {
-                days += `<div class="day today active">${i}</div>`;
+                days += setTodayAsActive
+                    ? `<div class="day today active">${i}</div>`
+                    : `<div class="day today">${i}</div>`;
             }
         } else {
             if (event) {
@@ -133,7 +137,7 @@ function prevMonth() {
         month = 11;
         year--;
     }
-    initCalendar();
+    initCalendar(false);
 }
 
 function nextMonth() {
@@ -142,7 +146,7 @@ function nextMonth() {
         month = 0;
         year++;
     }
-    initCalendar();
+    initCalendar(false);
 }
 
 prev.addEventListener("click", prevMonth);
@@ -165,10 +169,6 @@ function addListner() {
             //if clicked prev-date or next-date switch to that month
             if (e.target.classList.contains("prev-date")) {
                 prevMonth();
-                //remove active
-                days.forEach((day) => {
-                    day.classList.remove("active");
-                });
                 //add active to clicked day afte month is change
                 setTimeout(() => {
                     //add active where no prev-date or next-date
@@ -184,10 +184,6 @@ function addListner() {
                 }, 100);
             } else if (e.target.classList.contains("next-date")) {
                 nextMonth();
-                //remove active
-                days.forEach((day) => {
-                    day.classList.remove("active");
-                });
                 //add active to clicked day afte month is changed
                 setTimeout(() => {
                     const days = document.querySelectorAll(".day");
