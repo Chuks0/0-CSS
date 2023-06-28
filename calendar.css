@@ -472,6 +472,7 @@ body {
 .add-event-body .add-event-input input:focus::placeholder {
     color: var(--primary-clr);
 }
+/*
 .add-event-footer {
     display: flex;
     align-items: center;
@@ -495,7 +496,7 @@ body {
     background-color: transparent;
     color: var(--primary-clr);
 }
-
+*/
 /* media queries */
 
 @media screen and (max-width: 1000px) {
