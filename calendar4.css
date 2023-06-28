@@ -49,7 +49,7 @@ body {
 
 .left {
     /* width: 60%; */
-    padding: 20px;
+    /* padding: 20px; */
 }
 .calendar {
     position: relative;
@@ -130,7 +130,7 @@ body {
 }
 .calendar .days .day {
     width: 14.28%;
-    height: 90px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
