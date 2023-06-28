@@ -15,9 +15,8 @@ const calendar = document.querySelector(".calendar"),
     addEventTitle = document.querySelector(".event-name "),
     addEventFrom = document.querySelector(".event-time-from "),
     addEventTo = document.querySelector(".event-time-to "),
-    addEventSubmit = document.querySelector(".add-event-btn "),
-    selectDate = document.querySelector(".today-date");
-
+    addEventSubmit = document.querySelector(".add-event-btn ");
+//selectDate = document.querySelector(".today-date")
 let today = new Date();
 let activeDay;
 let month = today.getMonth();
@@ -664,7 +663,7 @@ function convertTime(time) {
 }
 
 function openPage(day) {
-    selectDate.value = day;
+    //selectDate.value = day;
     updateEvents(day);
 }
 
