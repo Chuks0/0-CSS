@@ -11,6 +11,7 @@
     font-family: "Poppins", sans-serif;
 }
 /* nice scroll bar */
+/*
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -21,7 +22,7 @@
 ::-webkit-scrollbar-thumb {
     background: var(--primary-clr);
     border-radius: 50px;
-}
+}*/
 
 /*
 body {
