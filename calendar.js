@@ -165,6 +165,10 @@ function addListner() {
             //if clicked prev-date or next-date switch to that month
             if (e.target.classList.contains("prev-date")) {
                 prevMonth();
+                //remove active
+                days.forEach((day) => {
+                    day.classList.remove("active");
+                });
                 //add active to clicked day afte month is change
                 setTimeout(() => {
                     //add active where no prev-date or next-date
@@ -180,6 +184,10 @@ function addListner() {
                 }, 100);
             } else if (e.target.classList.contains("next-date")) {
                 nextMonth();
+                //remove active
+                days.forEach((day) => {
+                    day.classList.remove("active");
+                });
                 //add active to clicked day afte month is changed
                 setTimeout(() => {
                     const days = document.querySelectorAll(".day");
