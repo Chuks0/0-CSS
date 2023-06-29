@@ -9,6 +9,7 @@ const calendar = document.querySelector(".calendar"),
     //eventDay = document.querySelector(".event-day"),
     //eventDay = document.querySelector(".calendar-day"),
     eventDate = document.querySelector(".event-date"),
+    eventsContainer = document.querySelector(".calendar-slots-wrapper"),
     addEventBtn = document.querySelector(".add-event"),
     addEventWrapper = document.querySelector(".add-event-wrapper "),
     addEventCloseBtn = document.querySelector(".close "),
@@ -314,11 +315,11 @@ function updateEvents(day) {
                 }
                 event.status = available_bool ? event.status : "expired";
                 events += `<div class="calendar-time-slot">
-            <div>
+            <div class="title">
               <i class="fas fa-circle ${event.status}"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
-            <div>
+            <div class="event-time">
               <span class="event-time">${event.time}</span>
             </div>
         </div>`;
@@ -331,7 +332,6 @@ function updateEvents(day) {
         </div>`;
     }
     console.log(date);
-    let eventsContainer = document.querySelector(".calendar-slots-wrapper");
     eventsContainer.innerHTML = events;
     saveEvents();
 }
@@ -354,16 +354,15 @@ function min30(day) {
             checked = "checked";
         }
         events += `
-      <label for="${slotTime}">${slotTime}</label>
-      <input
-      onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
+        <div class="calendar-time-slot" onclick="dateCheck('${
+            day - 1
+        }', '${i}','${i + 1}', this)"
       type="checkbox"
       id="${i}"
       name="${slotTime}"
-      value="${i}"
-      ${checked}
-      />
-      <br/>
+      value="${i}">
+      <div>${slotTime}</div>
+      </div>
         `;
     }
     return events;
@@ -386,16 +385,15 @@ function min60(day) {
             checked = "checked";
         }
         events += `
-      <label for="${slotTime}">${slotTime}</label>
-      <input
-      onclick="dateCheck('${day - 1}', '${i}','${i + 2}', this)"
+        <div class="calendar-time-slot" onclick="dateCheck('${
+            day - 1
+        }', '${i}','${i + 2}', this)"
       type="checkbox"
       id="${i}"
       name="${slotTime}"
-      value="${i}"
-      ${checked}
-      />
-      <br/>
+      value="${i}">
+      <div>${slotTime}</div>
+      </div>
         `;
     }
     return events;
@@ -421,16 +419,15 @@ function min120(day) {
             checked = "checked";
         }
         events += `
-      <label for="${slotTime}">${slotTime}</label>
-      <input
-      onclick="dateCheck('${day - 1}', '${i}','${i + 4}', this)"
+        <div class="calendar-time-slot" onclick="dateCheck('${
+            day - 1
+        }', '${i}','${i + 4}', this)"
       type="checkbox"
       id="${i}"
       name="${slotTime}"
-      value="${i}"
-      ${checked}
-      />
-      <br/>
+      value="${i}">
+      <div>${slotTime}</div>
+      </div>
         `;
     }
     return events;
