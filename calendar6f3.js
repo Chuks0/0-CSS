@@ -314,11 +314,11 @@ function updateEvents(day) {
                 }
                 event.status = available_bool ? event.status : "expired";
                 events += `<div class="calendar-time-slot">
-            <div class="title">
+            <div>
               <i class="fas fa-circle ${event.status}"></i>
               <h3 class="event-title">${event.title}</h3>
             </div>
-            <div class="event-time">
+            <div>
               <span class="event-time">${event.time}</span>
             </div>
         </div>`;
