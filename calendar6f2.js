@@ -9,7 +9,6 @@ const calendar = document.querySelector(".calendar"),
     //eventDay = document.querySelector(".event-day"),
     //eventDay = document.querySelector(".calendar-day"),
     eventDate = document.querySelector(".event-date"),
-    eventsContainer = document.querySelector(".calendar-slots-wrapper"),
     addEventBtn = document.querySelector(".add-event"),
     addEventWrapper = document.querySelector(".add-event-wrapper "),
     addEventCloseBtn = document.querySelector(".close "),
@@ -332,6 +331,7 @@ function updateEvents(day) {
         </div>`;
     }
     console.log(date);
+    let eventsContainer = document.querySelector(".calendar-slots-wrapper");
     eventsContainer.innerHTML = events;
     saveEvents();
 }
