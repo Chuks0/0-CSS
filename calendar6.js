@@ -6,9 +6,10 @@ const calendar = document.querySelector(".calendar"),
     todayBtn = document.querySelector(".today-btn"),
     gotoBtn = document.querySelector(".goto-btn"),
     dateInput = document.querySelector(".date-input"),
-    eventDay = document.querySelector(".event-day"),
+    //eventDay = document.querySelector(".event-day"),
+    //eventDay = document.querySelector(".calendar-day"),
     eventDate = document.querySelector(".event-date"),
-    //eventsContainer = document.querySelector(".events"),
+    eventsContainer = document.querySelector(".calandar-slots-wrapper"),
     addEventBtn = document.querySelector(".add-event"),
     addEventWrapper = document.querySelector(".add-event-wrapper "),
     addEventCloseBtn = document.querySelector(".close "),
@@ -37,25 +38,7 @@ const months = [
     "December",
 ];
 
-// const eventsArr = [
-//   {
-//     day: 13,
-//     month: 11,
-//     year: 2022,
-//     events: [
-//       {
-//         title: "Event 1 lorem ipsun dolar sit genfa tersd dsad ",
-//         time: "10:00 AM",
-//       },
-//       {
-//         title: "Event 2",
-//         time: "11:00 AM",
-//       },
-//     ],
-//   },
-// ];
-
-const eventsArr = []; // pre fill with time slots
+const eventsArr = []; // fill with time slots open
 let weekSlotsArr;
 let minSetVal = 2;
 let slotDay = new Date().getDay();
@@ -244,7 +227,9 @@ function gotoDate() {
 //function get active day day name and date and update eventday eventdate
 /*function getActiveDay(date) {
     const day = new Date(year, month, date);
+    console.log(day);
     const dayName = day.toString().split(" ")[0];
+    console.log(dayName);
     eventDay.innerHTML = dayName;
     eventDate.innerHTML = date + " " + months[month] + " " + year;
 }*/
@@ -268,6 +253,7 @@ function ger48(i) {
 }
 
 //function update events when a day is active
+// 0-6 Mon-Sun
 function updateEvents(day) {
     weekSlotsArr = setWeekSlotArr();
 
@@ -280,6 +266,9 @@ function updateEvents(day) {
             events = min60(day);
             break;
         case 3:
+            events = min60(day);
+            break;
+        case 4:
             events = min120(day);
             break;
 
@@ -288,7 +277,6 @@ function updateEvents(day) {
             break;
     }
 
-    /*
     eventsArr.forEach((event) => {
         if (
             date === event.day &&
@@ -326,7 +314,7 @@ function updateEvents(day) {
                     }
                 }
                 event.status = available_bool ? event.status : "expired";
-                events += `<div class="event">
+                events += `<div class="calendar-time-slot">
             <div class="title">
               <i class="fas fa-circle ${event.status}"></i>
               <h3 class="event-title">${event.title}</h3>
@@ -342,9 +330,9 @@ function updateEvents(day) {
         events = `<div class="no-event">
             <h3>No Availability</h3>
         </div>`;
-    }*/
+    }
     console.log(date);
-    //eventsContainer.innerHTML = events;
+    eventsContainer.innerHTML = events;
     saveEvents();
 }
 
@@ -671,9 +659,9 @@ function openPage(day) {
     updateEvents(day);
 }
 
-/*selectDate.addEventListener("change", (e) => {
-    updateEvents(e.target.value);
-});*/
+// selectDate.addEventListener("change", (e) => {
+//     updateEvents(e.target.value);
+// });
 
 function minSet(val) {
     minSetVal = val;
