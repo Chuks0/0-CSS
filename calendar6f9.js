@@ -670,7 +670,7 @@ function openPage(element) {
             day.classList.remove("active");
         }
     });
-    let dayVal = element.dagetAttribute("day");
+    let dayVal = element.getAttribute("day");
     updateEvents(dayVal);
 }
 function setTimeSlot(element) {
@@ -682,7 +682,7 @@ function setTimeSlot(element) {
             timeSlot.classList.remove("active");
         }
     });
-    let timeSlot = element.dagetAttribute("timeslot");
+    let timeSlot = element.getAttribute("timeslot");
     minSet(timeSlot);
 }
 // selectDate.addEventListener("change", (e) => {
