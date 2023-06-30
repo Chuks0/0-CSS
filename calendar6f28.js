@@ -264,13 +264,13 @@ function ger48(i) {
 //function update events when a day is active
 // 0-6 Mon-Sun
 function updateEvents(day) {
-    console.log("day:" + day + " min:" + minSetVal);
     weekSlotsArr = setWeekSlotArr();
 
     let events = "";
     switch (minSetVal) {
         case 1:
             events = min30(day);
+            console.log(events);
             break;
         case 2:
             events = min60(day);
@@ -343,7 +343,7 @@ function updateEvents(day) {
     }
     // console.log(date);
     eventsContainer.innerHTML = events;
-    saveEvents();
+    //saveEvents();
 }
 
 function min30(day) {
