@@ -17,14 +17,16 @@ const calendar = document.querySelector(".calendar"),
     addEventFrom = document.querySelector(".event-time-from "),
     addEventTo = document.querySelector(".event-time-to "),
     //selectDate = document.querySelector(".today-date"),
+    calendarDays = document.getElementsByClassName(".calendar-day"),
+    calendarTimes = document.getElementsByClassName(
+        ".calendar-time-slot-terms"
+    ),
     addEventSubmit = document.querySelector(".add-event-btn ");
 
 let today = new Date();
 let activeDay;
 let month = today.getMonth();
 let year = today.getFullYear();
-let calendarTimes = document.querySelectorAll(".calendar-time-slot-terms"),
-    calendarDays = document.querySelectorAll(".calendar-day");
 
 const months = [
     "January",
@@ -47,7 +49,7 @@ let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
 
-console.logc(calendarDays);
+console.log(calendarDays);
 calendarDays.forEach((day) => {
     day.addEventListener("click", openPage(day));
 });
