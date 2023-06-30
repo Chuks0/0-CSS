@@ -661,9 +661,9 @@ function openPage(element) {
     //selectDate.value = day;
     calendarDays.forEach((day) => {
         if (day === element) {
-            day.classList.toggle("active");
+            day.style.borderColor = "red";
         } else {
-            day.classList.remove("active");
+            day.style.borderColor = "green";
         }
     });
     let dayVal = element.getAttribute("day");
@@ -674,9 +674,9 @@ function openPageDay(num) {
     calendarDays.forEach((day) => {
         let dayVal = day.getAttribute("day");
         if (dayVal === num) {
-            day.classList.toggle("active");
+            day.style.borderColor = "red";
         } else {
-            day.classList.remove("active");
+            day.style.borderColor = "green";
         }
     });
     updateEvents(num);
@@ -685,9 +685,9 @@ function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
         if (timeSlot === element) {
-            timeSlot.classList.toggle("active");
+            timeSlot.style.borderColor = "red";
         } else {
-            timeSlot.classList.remove("active");
+            timeSlot.style.borderColor = "green";
         }
     });
     let timeSlot = element.getAttribute("timeslot");
