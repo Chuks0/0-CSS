@@ -664,8 +664,8 @@ function convertTime(time) {
 function openPage(element) {
     //selectDate.value = day;
     calendarDays.forEach((day) => {
-        console.log(day + " - " + element);
         if (day === element) {
+            console.log(day + " - " + element);
             day.classList.add("active");
         } else {
             day.classList.remove("active");
@@ -677,8 +677,8 @@ function openPage(element) {
 
 function openPageDay(num) {
     calendarDays.forEach((day) => {
-        let dayVal = day.getAttribute("day");
         console.log(dayVal + " - " + num);
+        let dayVal = day.getAttribute("day");
         if (dayVal === num) {
             day.classList.add("active");
         } else {
@@ -690,8 +690,8 @@ function openPageDay(num) {
 function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
-        console.log(timeSlot + " - " + element);
         if (timeSlot === element) {
+            console.log(timeSlot + " - " + element);
             timeSlot.classList.add("active");
         } else {
             timeSlot.classList.remove("active");
