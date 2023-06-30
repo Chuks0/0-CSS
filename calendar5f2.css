@@ -569,6 +569,7 @@ body {
 
 .active {
     border-color: var(--primary-clr);
+    border-radius: 2%;
 }
 
 /*
