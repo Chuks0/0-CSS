@@ -508,7 +508,8 @@ function dateCheck(day, i, end, e) {
     if (e.classList.contains("active")) e.classList.remove("active");
     else e.classList.add("active");
 
-    console.log(JSON.stringify(weekSlotsArr));
+    //console.log(JSON.stringify(weekSlotsArr));
+    //console.log(minSetVal);
 }
 
 //function to add event
