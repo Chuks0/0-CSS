@@ -97,7 +97,7 @@ function initCalendar(setTodayAsActive = true) {
         ) {
             activeDay = i;
             //getActiveDay(i);
-            openPage(today.getDay());
+            openPageDay(today.getDay());
             if (event) {
                 days += setTodayAsActive
                     ? `<div class="day today active event">${i}</div>`
@@ -674,6 +674,18 @@ function openPage(element) {
     console.log(element);
     let dayVal = element.getAttribute("day");
     updateEvents(dayVal);
+}
+
+function openPageDay(num) {
+    calendarDays.forEach((day) => {
+        let dayVal = day.getAttribute("day");
+        if (dayVal === num) {
+            day.classList.add("active");
+        } else {
+            day.classList.remove("active");
+        }
+    });
+    updateEvents(num);
 }
 function setTimeSlot(element) {
     //selectDate.value = day;
