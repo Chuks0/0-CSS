@@ -47,7 +47,6 @@ let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
 
-console.log(weekSlotsArr);
 calendarDays.forEach((day) => {
     day.addEventListener("click", openPage(day));
 });
@@ -665,13 +664,13 @@ function convertTime(time) {
 function openPage(element) {
     //selectDate.value = day;
     calendarDays.forEach((day) => {
+        console.log(day + " - " + element);
         if (day === element) {
             day.classList.add("active");
         } else {
             day.classList.remove("active");
         }
     });
-    console.log(element);
     let dayVal = element.getAttribute("day");
     updateEvents(dayVal);
 }
@@ -679,6 +678,7 @@ function openPage(element) {
 function openPageDay(num) {
     calendarDays.forEach((day) => {
         let dayVal = day.getAttribute("day");
+        console.log(dayVal + " - " + mun);
         if (dayVal === num) {
             day.classList.add("active");
         } else {
@@ -690,13 +690,13 @@ function openPageDay(num) {
 function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
+        console.log(day + " - " + element);
         if (timeSlot === element) {
             timeSlot.classList.add("active");
         } else {
             timeSlot.classList.remove("active");
         }
     });
-    console.log(element);
     let timeSlot = element.getAttribute("timeslot");
     minSet(timeSlot);
 }
