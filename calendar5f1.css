@@ -566,6 +566,11 @@ body {
         padding: 20px;
     }
 }
+
+.active {
+    border-color: var(--primary-clr);
+}
+
 /*
 .credits {
     position: absolute;
