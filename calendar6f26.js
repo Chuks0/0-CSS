@@ -48,10 +48,10 @@ let slotDay = new Date().getDay();
 getEvents();
 
 calendarDays.forEach((day) => {
-    day.addEventListener("click", openPage(day));
+    day.addEventListener("click", () => openPage(day));
 });
 calendarTimes.forEach((timeslot) => {
-    timeslot.addEventListener("click", setTimeSlot(timeslot));
+    timeslot.addEventListener("click", () => setTimeSlot(timeslot));
 });
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
@@ -662,10 +662,8 @@ function openPage(element) {
     calendarDays.forEach((day) => {
         if (day === element) {
             day.style.borderColor = "red";
-            console.log(day.getAttribute("day")+"D");
         } else {
             day.style.borderColor = "grey";
-            console.log(day.getAttribute("day")+"d");
         }
     });
     let dayVal = element.getAttribute("day");
@@ -675,12 +673,10 @@ function openPage(element) {
 function openPageDay(num) {
     calendarDays.forEach((day) => {
         let dayVal = day.getAttribute("day");
-        if (dayVal === num) {
+        if (dayVal == num) {
             day.style.borderColor = "red";
-            console.log(day.getAttribute("day")+"T");
         } else {
             day.style.borderColor = "grey";
-            console.log(day.getAttribute("day")+"t");
         }
     });
     updateEvents(num);
