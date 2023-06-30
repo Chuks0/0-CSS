@@ -42,7 +42,7 @@ const months = [
 ];
 
 const eventsArr = []; // fill with time slots open
-let weekSlotsArr;
+let weekSlotsArr = setWeekSlotArr();
 let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
