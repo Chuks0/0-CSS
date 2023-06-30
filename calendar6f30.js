@@ -43,7 +43,7 @@ const months = [
 
 const eventsArr = []; // fill with time slots open
 let weekSlotsArr = setWeekSlotArr();
-let minSetVal = 2;
+let minSetVal = 0;
 let slotDay = new Date().getDay();
 getEvents();
 
@@ -359,6 +359,12 @@ function min30(day) {
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        let endTime =
+            j == 1
+                ? (slotTimeTime + 1 > 12 ? 1 : slotTimeTime + 1) +
+                  ":00" +
+                  (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
+                : slotTimeTime + ":30 " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
@@ -369,7 +375,7 @@ function min30(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime}</div>
+      <div>${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -389,6 +395,10 @@ function min60(day) {
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        let endTime =
+            (slotTimeTime + 1 > 12 ? 1 : slotTimeTime + 1) +
+            ":00" +
+            (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
@@ -399,7 +409,49 @@ function min60(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime}</div>
+      <div>${slotTime} - ${endTime}</div>
+      </div>
+        `;
+    }
+    return events;
+}
+function min90(day) {
+    let events = "";
+    let k = 0;
+    for (let i = 0; i < 48; i++) {
+        if (k != 0) {
+            k--;
+            continue;
+        }
+        k = 2;
+        let min = "00";
+        let checked = "";
+        let j = i % 2;
+        let hour = Math.ceil((i + 1) / 2);
+        if (j == 1) {
+            min = "30";
+        }
+        let slotTimeTime = hour > 12 ? hour % 12 : hour;
+        let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
+        slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
+        let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        let endTime =
+            j == 1
+                ? (slotTimeTime + 2 > 12 ? 2 : slotTimeTime + 1) +
+                  ":00" +
+                  (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM")
+                : slotTimeTime + ":30 " + timeformatter;
+        if (weekSlotsArr[day - 1][i] === "true") {
+            checked = "active";
+        }
+        events += `
+        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
+            day - 1
+        }', '${i}','${i + 1}', this)"
+      id="${i}"
+      name="${slotTime}"
+      value="${i}">
+      <div>${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -410,18 +462,22 @@ function min120(day) {
     let events = "";
     let j = 0;
     for (let i = 0; i < 48; i++) {
-        let min = "00";
-        let checked = "";
-        let hour = Math.ceil((i + 1) / 2);
         if (j != 0) {
             j--;
             continue;
         }
         j = 3;
+        let min = "00";
+        let checked = "";
+        let hour = Math.ceil((i + 1) / 2);
         let slotTimeTime = hour > 12 ? hour % 12 : hour;
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        let endTime =
+            (slotTimeTime + 2 > 12 ? 1 : slotTimeTime + 2) +
+            ":00" +
+            (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
@@ -432,7 +488,7 @@ function min120(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime}</div>
+      <div>${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -675,6 +731,7 @@ function openPageDay(num) {
         let dayVal = day.getAttribute("day");
         if (dayVal == num) {
             day.style.borderColor = "red";
+            setTimeSlot(day);
         } else {
             day.style.borderColor = "grey";
         }
