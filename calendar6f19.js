@@ -678,7 +678,7 @@ function openPage(element) {
 function openPageDay(num) {
     calendarDays.forEach((day) => {
         let dayVal = day.getAttribute("day");
-        console.log(dayVal + " - " + nun);
+        console.log(dayVal + " - " + num);
         if (dayVal === num) {
             day.classList.add("active");
         } else {
