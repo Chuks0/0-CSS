@@ -47,7 +47,7 @@ let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
 
-console.log(calendarDays);
+console.log(weekSlotsArr);
 calendarDays.forEach((day) => {
     day.addEventListener("click", openPage(day));
 });
