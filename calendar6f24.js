@@ -48,7 +48,7 @@ let slotDay = new Date().getDay();
 getEvents();
 
 calendarDays.forEach((day) => {
-    day.addEventListener("click", openPageDay(day.getAttribute("day")));
+    day.addEventListener("click", openPage(day));
 });
 calendarTimes.forEach((timeslot) => {
     timeslot.addEventListener("click", setTimeSlot(timeslot));
@@ -662,8 +662,10 @@ function openPage(element) {
     calendarDays.forEach((day) => {
         if (day === element) {
             day.style.borderColor = "red";
+            console.log(day.getAttribute("day____"));
         } else {
-            day.style.borderColor = "green";
+            day.style.borderColor = "grey";
+            console.log(day.getAttribute("day"));
         }
     });
     let dayVal = element.getAttribute("day");
@@ -675,8 +677,10 @@ function openPageDay(num) {
         let dayVal = day.getAttribute("day");
         if (dayVal === num) {
             day.style.borderColor = "red";
+            console.log(day.getAttribute("day____"));
         } else {
-            day.style.borderColor = "green";
+            day.style.borderColor = "grey";
+            console.log(day.getAttribute("day"));
         }
     });
     updateEvents(num);
@@ -687,7 +691,7 @@ function setTimeSlot(element) {
         if (timeSlot === element) {
             timeSlot.style.borderColor = "red";
         } else {
-            timeSlot.style.borderColor = "green";
+            timeSlot.style.borderColor = "grey";
         }
     });
     let timeSlot = element.getAttribute("timeslot");
