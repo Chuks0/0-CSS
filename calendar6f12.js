@@ -392,6 +392,7 @@ function min60(day) {
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        console.log(day);
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
