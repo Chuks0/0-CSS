@@ -268,17 +268,16 @@ function updateEvents(day) {
 
     let events = "";
     switch (minSetVal) {
-        case 1:
+        case "1":
             events = min30(day);
-            console.log(events);
             break;
-        case 2:
+        case "2":
             events = min60(day);
             break;
-        case 3:
+        case "3":
             events = min60(day);
             break;
-        case 4:
+        case "4":
             events = min120(day);
             break;
 
