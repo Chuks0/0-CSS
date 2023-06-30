@@ -257,7 +257,7 @@ function ger48(i) {
         sub[j] =
             localStorage.getItem(`weekSlotsArr${i}${j}`) != null
                 ? localStorage.getItem(`weekSlotsArr${i}${j}`)
-                : false;
+                : "false";
     }
     return sub;
 }
@@ -400,7 +400,7 @@ function min60(day) {
             (slotTimeTime + 1 > 12 ? 1 : slotTimeTime + 1) +
             ":00" +
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === true) {
+        if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
         events += `
@@ -442,7 +442,7 @@ function min90(day) {
                   ":00" +
                   (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
-        if (weekSlotsArr[day - 1][i] === true) {
+        if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
         events += `
@@ -479,7 +479,7 @@ function min120(day) {
             (slotTimeTime + 2 > 12 ? 1 : slotTimeTime + 2) +
             ":00" +
             (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === true) {
+        if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
         events += `
@@ -498,8 +498,10 @@ function min120(day) {
 
 function dateCheck(day, i, end, e) {
     for (let j = i; j < end; j++) {
-        if (j === i) weekSlotsArr[day][j] = !weekSlotsArr[day][j];
-        else weekSlotsArr[day][j] = false;
+        if (j === i)
+            weekSlotsArr[day][j] =
+                weekSlotsArr[day][j] === "true" ? "false" : "true";
+        else weekSlotsArr[day][j] = "false";
         localStorage.setItem(`weekSlotsArr${day}${j}`, weekSlotsArr[day][j]);
     }
 }
@@ -758,11 +760,9 @@ function setTimeSlotTime(num) {
     calendarTimes.forEach((timeSlot) => {
         let timeSlottime = timeSlot.getAttribute("timeslot");
         if (timeSlottime === num) {
-            console.log("T");
             timeSlot.style.borderColor = "red";
         } else {
             timeSlot.style.borderColor = "grey";
-            console.log("t");
         }
     });
     minSet(num);
