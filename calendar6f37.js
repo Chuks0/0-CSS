@@ -504,6 +504,9 @@ function dateCheck(day, i, end, e) {
         else weekSlotsArr[day][j] = "false";
         localStorage.setItem(`weekSlotsArr${day}${j}`, weekSlotsArr[day][j]);
     }
+
+    if (e.classList.contains("active")) e.classList.remove("active");
+    else e.classList.add("active");
 }
 
 //function to add event
