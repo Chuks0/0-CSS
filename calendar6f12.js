@@ -256,7 +256,8 @@ function ger48(i) {
     for (let j = 0; j < 48; j++) {
         sub[j] =
             localStorage.getItem(`weekSlotsArr${i}${j}`) != null
-                ? localStorage.getItem(`weekSlotsArr${i}${j}`)
+                ? // ? localStorage.getItem(`weekSlotsArr${i}${j}`)
+                  "false"
                 : "false";
     }
     return sub;
