@@ -17,6 +17,8 @@ const calendar = document.querySelector(".calendar"),
     addEventFrom = document.querySelector(".event-time-from "),
     addEventTo = document.querySelector(".event-time-to "),
     //selectDate = document.querySelector(".today-date"),
+    calendarDays = document.querySelectorAll(".calendar-day"),
+    calendarTimes = document.querySelectorAll(".calendar-time-slot-terms"),
     addEventSubmit = document.querySelector(".add-event-btn ");
 let today = new Date();
 let activeDay;
@@ -43,7 +45,14 @@ let weekSlotsArr;
 let minSetVal = 2;
 let slotDay = new Date().getDay();
 getEvents();
+
 console.log(eventsArr);
+calendarDays.forEach((day) => {
+    day.addEventListener("click", openPage(day));
+});
+calendarTimes.forEach((timeslot) => {
+    timeslot.addEventListener("click", setTimeSlot(timeslot));
+});
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
 function initCalendar(setTodayAsActive = true) {
@@ -351,10 +360,10 @@ function min30(day) {
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "checked";
+            checked = "active";
         }
         events += `
-        <div class="calendar-time-slot" onclick="dateCheck('${
+        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       type="checkbox"
@@ -382,10 +391,10 @@ function min60(day) {
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "checked";
+            checked = "active";
         }
         events += `
-        <div class="calendar-time-slot" onclick="dateCheck('${
+        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 2}', this)"
       type="checkbox"
@@ -416,10 +425,10 @@ function min120(day) {
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "checked";
+            checked = "active";
         }
         events += `
-        <div class="calendar-time-slot" onclick="dateCheck('${
+        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 4}', this)"
       type="checkbox"
@@ -651,11 +660,30 @@ function convertTime(time) {
     return time;
 }
 
-function openPage(day) {
+function openPage(element) {
     //selectDate.value = day;
-    updateEvents(day);
+    calendarDays.forEach((day) => {
+        if (day === element) {
+            day.classList.add("active");
+        } else {
+            day.classList.remove("active");
+        }
+    });
+    let dayVal = element.dagetAttribute("day");
+    updateEvents(dayVal);
 }
-
+function setTimeSlot(element) {
+    //selectDate.value = day;
+    calendarTimes.forEach((timeSlot) => {
+        if (timeSlot === element) {
+            timeSlot.classList.add("active");
+        } else {
+            timeSlot.classList.remove("active");
+        }
+    });
+    let timeSlot = element.dagetAttribute("timeslot");
+    minSet(timeSlot);
+}
 // selectDate.addEventListener("change", (e) => {
 //     updateEvents(e.target.value);
 // });
