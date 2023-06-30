@@ -255,8 +255,7 @@ function ger48(i) {
     for (let j = 0; j < 48; j++) {
         sub[j] =
             localStorage.getItem(`weekSlotsArr${i}${j}`) != null
-                ? // ? localStorage.getItem(`weekSlotsArr${i}${j}`)
-                  "false"
+                ? localStorage.getItem(`weekSlotsArr${i}${j}`)
                 : "false";
     }
     return sub;
@@ -367,7 +366,6 @@ function min30(day) {
         <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
-      type="checkbox"
       id="${i}"
       name="${slotTime}"
       value="${i}">
@@ -398,7 +396,6 @@ function min60(day) {
         <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 2}', this)"
-      type="checkbox"
       id="${i}"
       name="${slotTime}"
       value="${i}">
@@ -432,7 +429,6 @@ function min120(day) {
         <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 4}', this)"
-      type="checkbox"
       id="${i}"
       name="${slotTime}"
       value="${i}">
@@ -665,8 +661,7 @@ function openPage(element) {
     //selectDate.value = day;
     calendarDays.forEach((day) => {
         if (day === element) {
-            console.log(day + " - " + element);
-            day.classList.add("active");
+            day.classList.toggle("active");
         } else {
             day.classList.remove("active");
         }
@@ -678,9 +673,8 @@ function openPage(element) {
 function openPageDay(num) {
     calendarDays.forEach((day) => {
         let dayVal = day.getAttribute("day");
-        console.log(dayVal + " - " + num);
         if (dayVal === num) {
-            day.classList.add("active");
+            day.classList.toggle("active");
         } else {
             day.classList.remove("active");
         }
@@ -691,8 +685,7 @@ function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
         if (timeSlot === element) {
-            console.log(timeSlot + " - " + element);
-            timeSlot.classList.add("active");
+            timeSlot.classList.toggle("active");
         } else {
             timeSlot.classList.remove("active");
         }
