@@ -342,7 +342,7 @@ function updateEvents(day) {
             <h3>No Availability</h3>
         </div>`;
     }
-    console.log(date);
+    // console.log(date);
     eventsContainer.innerHTML = events;
     saveEvents();
 }
@@ -392,7 +392,6 @@ function min60(day) {
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
-        console.log(day);
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "active";
         }
@@ -672,6 +671,7 @@ function openPage(element) {
             day.classList.remove("active");
         }
     });
+    console.log(element);
     let dayVal = element.getAttribute("day");
     updateEvents(dayVal);
 }
@@ -684,6 +684,7 @@ function setTimeSlot(element) {
             timeSlot.classList.remove("active");
         }
     });
+    console.log(element);
     let timeSlot = element.getAttribute("timeslot");
     minSet(timeSlot);
 }
