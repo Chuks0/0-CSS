@@ -662,10 +662,10 @@ function openPage(element) {
     calendarDays.forEach((day) => {
         if (day === element) {
             day.style.borderColor = "red";
-            console.log(day.getAttribute("day____"));
+            console.log(day.getAttribute("day")+"D");
         } else {
             day.style.borderColor = "grey";
-            console.log(day.getAttribute("day"));
+            console.log(day.getAttribute("day")+"d");
         }
     });
     let dayVal = element.getAttribute("day");
@@ -677,10 +677,10 @@ function openPageDay(num) {
         let dayVal = day.getAttribute("day");
         if (dayVal === num) {
             day.style.borderColor = "red";
-            console.log(day.getAttribute("day____"));
+            console.log(day.getAttribute("day")+"T");
         } else {
             day.style.borderColor = "grey";
-            console.log(day.getAttribute("day"));
+            console.log(day.getAttribute("day")+"t");
         }
     });
     updateEvents(num);
