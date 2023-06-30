@@ -48,7 +48,7 @@ let slotDay = new Date().getDay();
 getEvents();
 
 calendarDays.forEach((day) => {
-    day.addEventListener("click", openPage(day));
+    day.addEventListener("click", openPageDay(day.getAttribute("day")));
 });
 calendarTimes.forEach((timeslot) => {
     timeslot.addEventListener("click", setTimeSlot(timeslot));
