@@ -742,9 +742,11 @@ function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
         if (timeSlot === element) {
+            console.log("T");
             timeSlot.style.borderColor = "red";
         } else {
             timeSlot.style.borderColor = "grey";
+            console.log("t");
         }
     });
     let timeSlot = element.getAttribute("timeslot");
