@@ -275,7 +275,7 @@ function updateEvents(day) {
             events = min60(day);
             break;
         case "3":
-            events = min60(day);
+            events = min90(day);
             break;
         case "4":
             events = min120(day);
