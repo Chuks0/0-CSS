@@ -690,7 +690,7 @@ function openPageDay(num) {
 function setTimeSlot(element) {
     //selectDate.value = day;
     calendarTimes.forEach((timeSlot) => {
-        console.log(day + " - " + element);
+        console.log(timeSlot + " - " + element);
         if (timeSlot === element) {
             timeSlot.classList.add("active");
         } else {
