@@ -141,6 +141,7 @@ function nextMonth() {
     initCalendar(false);
 }
 
+console.log(weekSlotsArr);
 prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
 
@@ -731,7 +732,7 @@ function openPageDay(num) {
         let dayVal = day.getAttribute("day");
         if (dayVal == num) {
             day.style.borderColor = "red";
-            setTimeSlot(day);
+            setTimeSlotTime("0"); // pulled form db
         } else {
             day.style.borderColor = "grey";
         }
@@ -751,6 +752,20 @@ function setTimeSlot(element) {
     });
     let timeSlot = element.getAttribute("timeslot");
     minSet(timeSlot);
+}
+function setTimeSlotTime(num) {
+    //selectDate.value = day;
+    calendarTimes.forEach((timeSlot) => {
+        let timeSlottime = timeSlot.getAttribute("timeslot");
+        if (timeSlottime === num) {
+            console.log("T");
+            timeSlot.style.borderColor = "red";
+        } else {
+            timeSlot.style.borderColor = "grey";
+            console.log("t");
+        }
+    });
+    minSet(num);
 }
 // selectDate.addEventListener("change", (e) => {
 //     updateEvents(e.target.value);
