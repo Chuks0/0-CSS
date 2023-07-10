@@ -134,6 +134,7 @@ function initCalendar(setTodayAsActive = true) {
         for (let d = 0; d < 7; d++) {
             extraDays += `<div class="calendar_item day grey-out next-date"> - </div>`;
         }
+        days += extraDays;
         days += weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
     }
     daysContainer.innerHTML = days;
