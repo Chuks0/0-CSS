@@ -50,14 +50,22 @@ function initCalendar(setTodayAsActive = true) {
     const lastDate = lastDay.getDate();
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
-    const todayDate = document.getElementById(day);
 
     date.innerHTML = months[month] + " " + year;
 
-    let days = "";
+    let days = `<div class="calendar_row">`;
+    let dayCount = 0;
+    let weekCount = 0;
 
     for (let x = day; x > 0; x--) {
         days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
+        dayCount++;
+        if (dayCount >= 7) {
+            weekCount++;
+            dayCount = 0;
+            days +=
+                weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
+        }
     }
 
     for (let i = 1; i <= lastDate; i++) {
@@ -82,7 +90,6 @@ function initCalendar(setTodayAsActive = true) {
             month === new Date().getMonth()
         ) {
             activeDay = i;
-            //getActiveDay(i);
             openPageDay(today.getDay());
             if (event) {
                 days += setTodayAsActive
@@ -100,10 +107,28 @@ function initCalendar(setTodayAsActive = true) {
                 days += `<div class="day ">${i}</div>`;
             }
         }
+        dayCount++;
+        if (dayCount >= 7) {
+            weekCount++;
+            dayCount = 0;
+            days +=
+                weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
+        }
     }
 
     for (let j = 1; j <= nextDays; j++) {
         days += `<div class="day next-date">${j}</div>`;
+        dayCount++;
+        if (dayCount >= 7) {
+            weekCount++;
+            dayCount = 0;
+            days +=
+                weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
+        }
+    }
+    while (weekCount < 6) {
+        weekCount++;
+        days += weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
     }
     daysContainer.innerHTML = days;
     addListner();
