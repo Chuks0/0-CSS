@@ -58,7 +58,9 @@ function initCalendar(setTodayAsActive = true) {
     let weekCount = 0;
 
     for (let x = day; x > 0; x--) {
-        days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
+        days += `<div class="calendar_item day prev-date">${
+            prevDays - x + 1
+        }</div>`;
         dayCount++;
         if (dayCount >= 7) {
             weekCount++;
@@ -93,18 +95,18 @@ function initCalendar(setTodayAsActive = true) {
             openPageDay(today.getDay());
             if (event) {
                 days += setTodayAsActive
-                    ? `<div class="day today active event">${i}</div>`
-                    : `<div class="day today event">${i}</div>`;
+                    ? `<div class="calendar_item day today active event">${i}</div>`
+                    : `<div class="calendar_item day today event">${i}</div>`;
             } else {
                 days += setTodayAsActive
-                    ? `<div class="day today active">${i}</div>`
-                    : `<div class="day today">${i}</div>`;
+                    ? `<div class="calendar_item day today active">${i}</div>`
+                    : `<div class="calendar_item day today">${i}</div>`;
             }
         } else {
             if (event) {
-                days += `<div class="day event">${i}</div>`;
+                days += `<div class="calendar_item day event">${i}</div>`;
             } else {
-                days += `<div class="day ">${i}</div>`;
+                days += `<div class="calendar_item day ">${i}</div>`;
             }
         }
         dayCount++;
@@ -117,7 +119,7 @@ function initCalendar(setTodayAsActive = true) {
     }
 
     for (let j = 1; j <= nextDays; j++) {
-        days += `<div class="day next-date">${j}</div>`;
+        days += `<div class="calendar_item day next-date">${j}</div>`;
         dayCount++;
         if (dayCount >= 7) {
             weekCount++;
@@ -128,6 +130,10 @@ function initCalendar(setTodayAsActive = true) {
     }
     while (weekCount < 6) {
         weekCount++;
+        let extraDays = "";
+        for (let d = 0; d < 7; d++) {
+            extraDays += `<div class="calendar_item day next-date"> - </div>`;
+        }
         days += weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
     }
     daysContainer.innerHTML = days;
