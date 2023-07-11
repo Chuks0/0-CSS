@@ -350,13 +350,13 @@ function min30(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
+        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -384,7 +384,7 @@ function min60(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
+        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 2}', this)"
       id="${i}"
@@ -426,13 +426,13 @@ function min90(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
+        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -463,13 +463,13 @@ function min120(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
+        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 4}', this)"
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
