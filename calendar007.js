@@ -4,7 +4,7 @@ const calendar = document.querySelector(".calendar"),
     prev = document.querySelector(".prev"),
     next = document.querySelector(".next"),
     // todayBtn = document.querySelector(".today-btn"),
-    eventsContainer = document.querySelector(".calendar-slots-wrapper"),
+    eventsContainer = document.querySelector(".calendar-setup-timeslot"),
     calendarDays = document.querySelectorAll(".calendar-day"),
     calendarTimes = document.querySelectorAll(".calendar-time-slot-terms");
 
@@ -347,10 +347,10 @@ function min30(day) {
                   (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "active";
+            checked = "w--redirected-checked";
         }
         events += `
-        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
+        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
@@ -381,10 +381,10 @@ function min60(day) {
             ":00" +
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "active";
+            checked = "w--redirected-checked";
         }
         events += `
-        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
+        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 2}', this)"
       id="${i}"
@@ -423,10 +423,10 @@ function min90(day) {
                   (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "active";
+            checked = "w--redirected-checked";
         }
         events += `
-        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
+        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
@@ -460,10 +460,10 @@ function min120(day) {
             ":00" +
             (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
         if (weekSlotsArr[day - 1][i] === "true") {
-            checked = "active";
+            checked = "w--redirected-checked";
         }
         events += `
-        <div class="calendar-time-slot ${checked}" onclick="dateCheck('${
+        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 4}', this)"
       id="${i}"
