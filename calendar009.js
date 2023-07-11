@@ -356,7 +356,7 @@ function min30(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime} - ${endTime}</div>
+      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -390,7 +390,7 @@ function min60(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime} - ${endTime}</div>
+      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -432,7 +432,7 @@ function min90(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime} - ${endTime}</div>
+      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
@@ -469,7 +469,7 @@ function min120(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div>${slotTime} - ${endTime}</div>
+      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
       </div>
         `;
     }
