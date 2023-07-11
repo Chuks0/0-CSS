@@ -5,8 +5,8 @@ const calendar = document.querySelector(".calendar"),
     next = document.querySelector(".next"),
     // todayBtn = document.querySelector(".today-btn"),
     eventsContainer = document.querySelector(".calendar-setup-timeslot"),
-    calendarDays = document.querySelectorAll(".calendar-day"),
-    calendarTimes = document.querySelectorAll(".calendar-time-slot-terms");
+    calendarDays = document.querySelectorAll(".checkbox-wrapper_day-setup"),
+    calendarTimes = document.querySelectorAll(".checkbox-timer");
 
 let today = new Date();
 let activeDay;
@@ -518,54 +518,18 @@ function convertTime(time) {
 }
 
 function openPage(element) {
-    //selectDate.value = day;
-    calendarDays.forEach((day) => {
-        if (day === element) {
-            day.style.borderColor = "red";
-        } else {
-            day.style.borderColor = "grey";
-        }
-    });
     let dayVal = element.getAttribute("day");
     updateEvents(dayVal);
 }
 
 function openPageDay(num) {
-    calendarDays.forEach((day) => {
-        let dayVal = day.getAttribute("day");
-        if (dayVal == num) {
-            day.style.borderColor = "red";
-            setTimeSlotTime("0"); // pulled form db
-        } else {
-            day.style.borderColor = "grey";
-        }
-    });
     updateEvents(num);
 }
 function setTimeSlot(element) {
-    //selectDate.value = day;
-    calendarTimes.forEach((timeSlot) => {
-        if (timeSlot === element) {
-            console.log("T");
-            timeSlot.style.borderColor = "red";
-        } else {
-            timeSlot.style.borderColor = "grey";
-            console.log("t");
-        }
-    });
     let timeSlot = element.getAttribute("timeslot");
     minSet(timeSlot);
 }
 function setTimeSlotTime(num) {
-    //selectDate.value = day;
-    calendarTimes.forEach((timeSlot) => {
-        let timeSlottime = timeSlot.getAttribute("timeslot");
-        if (timeSlottime === num) {
-            timeSlot.style.borderColor = "red";
-        } else {
-            timeSlot.style.borderColor = "grey";
-        }
-    });
     minSet(num);
 }
 // selectDate.addEventListener("change", (e) => {
