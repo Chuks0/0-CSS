@@ -349,16 +349,15 @@ function min30(day) {
         if (weekSlotsArr[day - 1][i] === "true") {
             checked = "w--redirected-checked";
         }
-        events += `
-        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
-            day - 1
-        }', '${i}','${i + 1}', this)"
-      id="${i}"
-      name="${slotTime}"
-      value="${i}">
-      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-      </div></div>
+        events += `<div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
+            id="${i}"
+            name="${slotTime}"
+            value="${i}"
+            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>
         `;
     }
     return events;
@@ -385,15 +384,15 @@ function min60(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
-            day - 1
-        }', '${i}','${i + 2}', this)"
-      id="${i}"
-      name="${slotTime}"
-      value="${i}">
-      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-      </div></div>
+        <div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 2}', this)"
+            id="${i}"
+            name="${slotTime}"
+            value="${i}"
+            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>
         `;
     }
     return events;
@@ -428,15 +427,15 @@ function min90(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
-            day - 1
-        }', '${i}','${i + 1}', this)"
-      id="${i}"
-      name="${slotTime}"
-      value="${i}">
-      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-      </div></div>
+        <div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
+            id="${i}"
+            name="${slotTime}"
+            value="${i}"
+            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>
         `;
     }
     return events;
@@ -466,15 +465,15 @@ function min120(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="w-checkbox checkbox-wrapper ${checked}" onclick="dateCheck('${
-            day - 1
-        }', '${i}','${i + 4}', this)"
-      id="${i}"
-      name="${slotTime}"
-      value="${i}">
-      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-      </div></div>
+        <div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 4}', this)"
+            id="${i}"
+            name="${slotTime}"
+            value="${i}"
+            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>
         `;
     }
     return events;
