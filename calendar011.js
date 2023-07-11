@@ -356,8 +356,9 @@ function min30(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
-      </div>
+      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+      </div></div>
         `;
     }
     return events;
@@ -390,8 +391,9 @@ function min60(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="Checkbox-6 Checkbox-Label-7" >${slotTime} - ${endTime}</div>
-      </div>
+      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+      </div></div>
         `;
     }
     return events;
@@ -432,8 +434,9 @@ function min90(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
-      </div>
+      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+      </div></div>
         `;
     }
     return events;
@@ -469,8 +472,9 @@ function min120(day) {
       id="${i}"
       name="${slotTime}"
       value="${i}">
-      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" >${slotTime} - ${endTime}</div>
-      </div>
+      <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" style="opacity:0;position:absolute;z-index:-1">
+      <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6" ><div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+      </div></div>
         `;
     }
     return events;
@@ -485,8 +489,9 @@ function dateCheck(day, i, end, e) {
         localStorage.setItem(`weekSlotsArr${day}${j}`, weekSlotsArr[day][j]);
     }
 
-    if (e.classList.contains("active")) e.classList.remove("active");
-    else e.classList.add("active");
+    if (e.classList.contains("w--redirected-checked"))
+        e.classList.remove("w--redirected-checked");
+    else e.classList.add("w--redirected-checked");
 
     //console.log(JSON.stringify(weekSlotsArr));
     //console.log(minSetVal);
