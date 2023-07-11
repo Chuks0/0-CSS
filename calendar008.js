@@ -350,7 +350,7 @@ function min30(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
+        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
@@ -384,7 +384,7 @@ function min60(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
+        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 2}', this)"
       id="${i}"
@@ -426,7 +426,7 @@ function min90(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
+        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 1}', this)"
       id="${i}"
@@ -463,7 +463,7 @@ function min120(day) {
             checked = "w--redirected-checked";
         }
         events += `
-        <div class="checkbox-6 ${checked}" onclick="dateCheck('${
+        <div class="checkbox-wrapper ${checked}" onclick="dateCheck('${
             day - 1
         }', '${i}','${i + 4}', this)"
       id="${i}"
