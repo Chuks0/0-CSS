@@ -6,6 +6,8 @@ const calendar = document.querySelector(".calendar"),
     // todayBtn = document.querySelector(".today-btn"),
     eventsContainer = document.querySelector(".calendar-setup-timeslot"),
     calendarDays = document.querySelectorAll(".checkbox-wrapper_day-setup"),
+    setup = document.querySelector(".calendar-setup-days"),
+    setupDaysWraper = document.querySelector(".calendar-setup-days-wrapper"),
     calendarTimes = document.querySelectorAll(".checkbox-timer");
 
 let today = new Date();
@@ -14,20 +16,21 @@ let month = today.getMonth();
 let year = today.getFullYear();
 
 const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
 ];
 
+setup.style.display = "none";
 const eventsArr = []; // fill with time slots open
 let weekSlotsArr = setWeekSlotArr();
 let minSetVal = 0;
@@ -51,7 +54,7 @@ function initCalendar(setTodayAsActive = true) {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
-    date.innerHTML = months[month] + " " + year;
+    date.innerHTML = year + "." + months[month];
 
     let days = `<div class="calendar_row">`;
     let dayCount = 0;
@@ -236,8 +239,8 @@ function ger48(i) {
     for (let j = 0; j < 48; j++) {
         sub[j] =
             localStorage.getItem(`weekSlotsArr${i}${j}`) != null
-                ? localStorage.getItem(`weekSlotsArr${i}${j}`)
-                : "false";
+                ? "a" //localStorage.getItem(`weekSlotsArr${i}${j}`)
+                : "n";
     }
     return sub;
 }
@@ -245,6 +248,7 @@ function ger48(i) {
 //function update events when a day is active
 // 0-6 Mon-Sun
 function updateEvents(day) {
+    slotDay = day;
     weekSlotsArr = setWeekSlotArr();
 
     let events = "";
@@ -346,7 +350,7 @@ function min30(day) {
                   ":00" +
                   (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
-        if (weekSlotsArr[day - 1][i] === "true") {
+        if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
         events += `<div class="w-checkbox checkbox-wrapper">
@@ -380,7 +384,7 @@ function min60(day) {
             (slotTimeTime + 1 > 12 ? 1 : slotTimeTime + 1) +
             ":00" +
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === "true") {
+        if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
         events += `
@@ -422,8 +426,8 @@ function min90(day) {
                 ? (slotTimeTime + 2 > 12 ? 2 : slotTimeTime + 2) +
                   ":00" +
                   (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM")
-                : slotTimeTime + ":30 " + timeformatter;
-        if (weekSlotsArr[day - 1][i] === "true") {
+                : slotTimeTime + 1 + ":30 " + timeformatter;
+        if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
         events += `
@@ -461,7 +465,7 @@ function min120(day) {
             (slotTimeTime + 2 > 12 ? 1 : slotTimeTime + 2) +
             ":00" +
             (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === "true") {
+        if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
         events += `
@@ -482,9 +486,8 @@ function min120(day) {
 function dateCheck(day, i, end, e) {
     for (let j = i; j < end; j++) {
         if (j === i)
-            weekSlotsArr[day][j] =
-                weekSlotsArr[day][j] === "true" ? "false" : "true";
-        else weekSlotsArr[day][j] = "false";
+            weekSlotsArr[day][j] = weekSlotsArr[day][j] === "s" ? "a" : "s";
+        else weekSlotsArr[day][j] = "a";
         localStorage.setItem(`weekSlotsArr${day}${j}`, weekSlotsArr[day][j]);
     }
 
