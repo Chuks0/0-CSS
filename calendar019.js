@@ -66,7 +66,9 @@ function initCalendar(setTodayAsActive = true) {
     for (let x = day; x > 0; x--) {
         dayCount++;
         greyOut =
-            weekSlotsArr[dayCount][prevDays - x + 1] === "n" ? "grey-out" : "";
+            weekSlotsArr[dayCount - 1][prevDays - x + 1] === "n"
+                ? "grey-out"
+                : "";
         days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date ${greyOut}">${
             prevDays - x + 1
         }</div>`;
@@ -80,7 +82,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let i = 1; i <= lastDate; i++) {
         dayCount++;
-        greyOut = weekSlotsArr[dayCount][i] === "n" ? "grey-out" : "";
+        greyOut = weekSlotsArr[dayCount - 1][i] === "n" ? "grey-out" : "";
         //check if event is present on that day
         let event = false;
         eventsArr.forEach((eventObj) => {
@@ -129,7 +131,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let j = 1; j <= nextDays; j++) {
         dayCount++;
-        greyOut = weekSlotsArr[dayCount][j] === "n" ? "grey-out" : "";
+        greyOut = weekSlotsArr[dayCount - 1][j] === "n" ? "grey-out" : "";
         days += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
@@ -144,7 +146,7 @@ function initCalendar(setTodayAsActive = true) {
         let i = nextDays + 1;
         for (let d = 0; d < 7; d++) {
             dayCount++;
-            greyOut = weekSlotsArr[dayCount][i] === "n" ? "grey-out" : "";
+            greyOut = weekSlotsArr[dayCount - 1][i] === "n" ? "grey-out" : "";
             extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${i}</div>`;
             i++;
         }
