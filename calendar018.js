@@ -61,10 +61,13 @@ function initCalendar(setTodayAsActive = true) {
     let days = `<div class="calendar_row">`;
     let dayCount = 0;
     let weekCount = 0;
+    let greyOut = ""; // <----- should be another class
 
     for (let x = day; x > 0; x--) {
         dayCount++;
-        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date">${
+        greyOut =
+            weekSlotsArr[dayCount][prevDays - x + 1] === "n" ? "grey-out" : "";
+        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date ${greyOut}">${
             prevDays - x + 1
         }</div>`;
         if (dayCount >= 7) {
@@ -77,6 +80,8 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let i = 1; i <= lastDate; i++) {
         dayCount++;
+        greyOut =
+            weekSlotsArr[dayCount][prevDays - x + 1] === "n" ? "grey-out" : "";
         //check if event is present on that day
         let event = false;
         eventsArr.forEach((eventObj) => {
@@ -101,18 +106,18 @@ function initCalendar(setTodayAsActive = true) {
             openPageDay(today.getDay() + 1);
             if (event) {
                 days += setTodayAsActive
-                    ? `<div day="${dayCount}" class="calendar_item day today active event">${i}</div>`
-                    : `<div day="${dayCount}" class="calendar_item day today event">${i}</div>`;
+                    ? `<div day="${dayCount}" class="calendar_item day today active event ${greyOut}">${i}</div>`
+                    : `<div day="${dayCount}" class="calendar_item day today event ${greyOut}">${i}</div>`;
             } else {
                 days += setTodayAsActive
-                    ? `<div day="${dayCount}" class="calendar_item day today active">${i}</div>`
-                    : `<div day="${dayCount}" class="calendar_item day today">${i}</div>`;
+                    ? `<div day="${dayCount}" class="calendar_item day today active ${greyOut}">${i}</div>`
+                    : `<div day="${dayCount}" class="calendar_item day today ${greyOut}">${i}</div>`;
             }
         } else {
             if (event) {
-                days += `<div day="${dayCount}" class="calendar_item day event">${i}</div>`;
+                days += `<div day="${dayCount}" class="calendar_item day event ${greyOut}">${i}</div>`;
             } else {
-                days += `<div day="${dayCount}" class="calendar_item day ">${i}</div>`;
+                days += `<div day="${dayCount}" class="calendar_item day ${greyOut}">${i}</div>`;
             }
         }
         if (dayCount >= 7) {
@@ -125,7 +130,9 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let j = 1; j <= nextDays; j++) {
         dayCount++;
-        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${j}</div>`;
+        greyOut =
+            weekSlotsArr[dayCount][prevDays - x + 1] === "n" ? "grey-out" : "";
+        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
@@ -139,7 +146,11 @@ function initCalendar(setTodayAsActive = true) {
         let i = nextDays + 1;
         for (let d = 0; d < 7; d++) {
             dayCount++;
-            extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${i}</div>`;
+            greyOut =
+                weekSlotsArr[dayCount][prevDays - x + 1] === "n"
+                    ? "grey-out"
+                    : "";
+            extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${i}</div>`;
             i++;
         }
         days += extraDays;
@@ -234,7 +245,6 @@ function addListner() {
 // 0-6 Mon-Sun
 function updateEvents(day) {
     slotDay = day;
-    console.log(day);
 
     let events = "";
     switch (minSetVal) {
@@ -256,55 +266,6 @@ function updateEvents(day) {
             break;
     }
 
-    eventsArr.forEach((event) => {
-        if (
-            date === event.day &&
-            month + 1 === event.month &&
-            year === event.year
-        ) {
-            let date1 = new Date(`${event.month}/${event.day}/${event.year}`);
-            let date2 = new Date();
-            event.events.forEach((event) => {
-                let available_bool = false;
-
-                if (date1 > date2) {
-                    available_bool = true;
-                } else {
-                    if (
-                        !(date2.getMonth() > date1.getMonth()) &&
-                        !(date2.getDay() > date1.getDay())
-                    ) {
-                        let timeArr = event.time.split(":");
-                        let minArr = timeArr[1].split(" ");
-                        let hourVal =
-                            minArr[1] === "PM"
-                                ? timeArr[0] != 12
-                                    ? parseInt(timeArr[0]) + 12
-                                    : timeArr[0]
-                                : timeArr[0];
-                        if (date2.getHours() < hourVal) {
-                            available_bool = true;
-                        } else if (
-                            date2.getHours() == hourVal &&
-                            date2.getMinutes() < minArr[0]
-                        ) {
-                            available_bool = true;
-                        }
-                    }
-                }
-                event.status = available_bool ? event.status : "expired";
-                events += `<div class="calendar-time-slot">
-            <div class="title">
-              <i class="fas fa-circle ${event.status}"></i>
-              <h3 class="event-title">${event.title}</h3>
-            </div>
-            <div class="event-time">
-              <span class="event-time">${event.time}</span>
-            </div>
-        </div>`;
-            });
-        }
-    });
     if (events === "") {
         events = `<div class="no-event">
             <h3>No Availability</h3>
