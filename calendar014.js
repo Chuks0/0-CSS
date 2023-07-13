@@ -1,3 +1,6 @@
+//TODO
+//only show up to 6m
+
 const calendar = document.querySelector(".calendar"),
     date = document.querySelector(".date"),
     daysContainer = document.querySelector(".days"),
@@ -32,10 +35,9 @@ const months = [
 
 setup.style.display = "none";
 const eventsArr = []; // fill with time slots open
-let weekSlotsArr = setWeekSlotArr();
+const weekSlotsArr = [];
 let minSetVal = 0;
 let slotDay = new Date().getDay();
-getEvents();
 
 calendarDays.forEach((day) => {
     day.addEventListener("click", () => openPage(day));
@@ -165,7 +167,6 @@ function nextMonth() {
     initCalendar(false);
 }
 
-console.log(weekSlotsArr);
 prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
 
@@ -227,29 +228,10 @@ function addListner() {
 //     initCalendar();
 // });
 
-function setWeekSlotArr() {
-    let results = [];
-    for (let i = 0; i < 7; i++) {
-        results[i] = ger48(i);
-    }
-    return results;
-}
-function ger48(i) {
-    let sub = [];
-    for (let j = 0; j < 48; j++) {
-        sub[j] =
-            localStorage.getItem(`weekSlotsArr${i}${j}`) != null
-                ? "a" //localStorage.getItem(`weekSlotsArr${i}${j}`)
-                : "n";
-    }
-    return sub;
-}
-
 //function update events when a day is active
 // 0-6 Mon-Sun
 function updateEvents(day) {
     slotDay = day;
-    weekSlotsArr = setWeekSlotArr();
 
     let events = "";
     switch (minSetVal) {
@@ -325,9 +307,8 @@ function updateEvents(day) {
             <h3>No Availability</h3>
         </div>`;
     }
-    // console.log(date);
+
     eventsContainer.innerHTML = events;
-    //saveEvents();
 }
 
 function min30(day) {
@@ -352,6 +333,9 @@ function min30(day) {
                 : slotTimeTime + ":30 " + timeformatter;
         if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
+        }
+        if (weekSlotsArr[day - 1][i] === "n") {
+            continue;
         }
         events += `<div class="w-checkbox checkbox-wrapper">
             <div onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
@@ -386,6 +370,9 @@ function min60(day) {
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
         if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
+        }
+        if (weekSlotsArr[day - 1][i] === "n") {
+            continue;
         }
         events += `
         <div class="w-checkbox checkbox-wrapper">
@@ -430,6 +417,9 @@ function min90(day) {
         if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
+        if (weekSlotsArr[day - 1][i] === "n") {
+            continue;
+        }
         events += `
         <div class="w-checkbox checkbox-wrapper">
             <div onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
@@ -468,6 +458,9 @@ function min120(day) {
         if (weekSlotsArr[day - 1][i] === "s") {
             checked = "w--redirected-checked";
         }
+        if (weekSlotsArr[day - 1][i] === "n") {
+            continue;
+        }
         events += `
         <div class="w-checkbox checkbox-wrapper">
             <div onclick="dateCheck('${day - 1}', '${i}','${i + 4}', this)"
@@ -488,7 +481,6 @@ function dateCheck(day, i, end, e) {
         if (j === i)
             weekSlotsArr[day][j] = weekSlotsArr[day][j] === "s" ? "a" : "s";
         else weekSlotsArr[day][j] = "a";
-        localStorage.setItem(`weekSlotsArr${day}${j}`, weekSlotsArr[day][j]);
     }
 
     if (e.classList.contains("w--redirected-checked"))
@@ -497,20 +489,6 @@ function dateCheck(day, i, end, e) {
 
     //console.log(JSON.stringify(weekSlotsArr));
     //console.log(minSetVal);
-}
-
-//function to save events in local storage
-function saveEvents() {
-    localStorage.setItem("events", JSON.stringify(eventsArr));
-}
-
-//function to get events from local storage
-function getEvents() {
-    //check if events are already saved in local storage then return event else nothing
-    if (localStorage.getItem("events") === null) {
-        return;
-    }
-    eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
 
 function convertTime(time) {
