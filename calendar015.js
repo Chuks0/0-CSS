@@ -63,10 +63,10 @@ function initCalendar(setTodayAsActive = true) {
     let weekCount = 0;
 
     for (let x = day; x > 0; x--) {
-        days += `<div class="calendar_item day grey-out prev-date">${
+        dayCount++;
+        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date">${
             prevDays - x + 1
         }</div>`;
-        dayCount++;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
@@ -76,6 +76,7 @@ function initCalendar(setTodayAsActive = true) {
     }
 
     for (let i = 1; i <= lastDate; i++) {
+        dayCount++;
         //check if event is present on that day
         let event = false;
         eventsArr.forEach((eventObj) => {
@@ -97,24 +98,24 @@ function initCalendar(setTodayAsActive = true) {
             month === new Date().getMonth()
         ) {
             activeDay = i;
+            console.log(today.getDay());
             openPageDay(today.getDay());
             if (event) {
                 days += setTodayAsActive
-                    ? `<div class="calendar_item day today active event">${i}</div>`
-                    : `<div class="calendar_item day today event">${i}</div>`;
+                    ? `<div day="${dayCount}" class="calendar_item day today active event">${i}</div>`
+                    : `<div day="${dayCount}" class="calendar_item day today event">${i}</div>`;
             } else {
                 days += setTodayAsActive
-                    ? `<div class="calendar_item day today active">${i}</div>`
-                    : `<div class="calendar_item day today">${i}</div>`;
+                    ? `<div day="${dayCount}" class="calendar_item day today active">${i}</div>`
+                    : `<div day="${dayCount}" class="calendar_item day today">${i}</div>`;
             }
         } else {
             if (event) {
-                days += `<div class="calendar_item day event">${i}</div>`;
+                days += `<div day="${dayCount}" class="calendar_item day event">${i}</div>`;
             } else {
-                days += `<div class="calendar_item day ">${i}</div>`;
+                days += `<div day="${dayCount}" class="calendar_item day ">${i}</div>`;
             }
         }
-        dayCount++;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
@@ -124,8 +125,8 @@ function initCalendar(setTodayAsActive = true) {
     }
 
     for (let j = 1; j <= nextDays; j++) {
-        days += `<div class="calendar_item day grey-out next-date">${j}</div>`;
         dayCount++;
+        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
@@ -138,7 +139,8 @@ function initCalendar(setTodayAsActive = true) {
         let extraDays = "";
         let i = nextDays + 1;
         for (let d = 0; d < 7; d++) {
-            extraDays += `<div class="calendar_item day grey-out next-date">${i}</div>`;
+            dayCount++;
+            extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${i}</div>`;
             i++;
         }
         days += extraDays;
@@ -217,6 +219,7 @@ function addListner() {
             } else {
                 e.target.classList.add("active");
             }
+            openPage(this);
         });
     });
 }
