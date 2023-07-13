@@ -99,6 +99,7 @@ function initCalendar(setTodayAsActive = true) {
         ) {
             activeDay = i;
             console.log(today.getDay());
+            console.log(dayCount);
             openPageDay(today.getDay());
             if (event) {
                 days += setTodayAsActive
@@ -219,7 +220,7 @@ function addListner() {
             } else {
                 e.target.classList.add("active");
             }
-            openPage(this);
+            openPage(e.target);
         });
     });
 }
