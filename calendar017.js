@@ -98,9 +98,7 @@ function initCalendar(setTodayAsActive = true) {
             month === new Date().getMonth()
         ) {
             activeDay = i;
-            console.log(today.getDay());
-            console.log(dayCount);
-            openPageDay(today.getDay());
+            openPageDay(today.getDay() + 1);
             if (event) {
                 days += setTodayAsActive
                     ? `<div day="${dayCount}" class="calendar_item day today active event">${i}</div>`
@@ -236,6 +234,7 @@ function addListner() {
 // 0-6 Mon-Sun
 function updateEvents(day) {
     slotDay = day;
+    console.log(day);
 
     let events = "";
     switch (minSetVal) {
