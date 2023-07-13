@@ -47,7 +47,7 @@ calendarTimes.forEach((timeslot) => {
 });
 
 const availability = (i) => {
-    const found = weekSlotsArr[i].find((element) => element === "a");
+    const found = weekSlotsArr[i - 1].find((element) => element === "a");
     if (found != null) return true;
     else return false;
 };
