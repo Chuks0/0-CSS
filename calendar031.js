@@ -38,7 +38,6 @@ const selectedSlot = [];
 let timeSelected;
 let minSetVal = 0;
 let slotDay = new Date().getDay();
-coachingBtn.disabled = true;
 
 calendarDays.forEach((day) => {
     day.addEventListener("click", () => openPage(day));
@@ -63,6 +62,7 @@ function initCalendar(setTodayAsActive = true) {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
+    coachingBtn.disabled = true;
     date.innerHTML = year + "." + months[month];
 
     let days = `<div class="calendar_row">`;
@@ -468,7 +468,7 @@ function dateCheck(day, i, end, e) {
     }
 
     coachingBtn.disabled =
-        localStorage.getItem(timeSelectedDay) != null ? false : true;
+        localStorage.getItem("timeSelectedDay") != null ? false : true;
     //console.log(JSON.stringify(weekSlotsArr));
     //console.log(minSetVal);
 }
