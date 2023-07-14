@@ -74,8 +74,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let x = day; x > 0; x--) {
         dayCount++;
-        greyOut = availability(dayCount) ? availabilityClass : "";
-        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date ${greyOut}">${
+        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date">${
             prevDays - x + 1
         }</div>`;
         if (dayCount >= 7) {
@@ -137,8 +136,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let j = 1; j <= nextDays; j++) {
         dayCount++;
-        greyOut = availability(dayCount) ? availabilityClass : "";
-        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${j}</div>`;
+        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
@@ -152,8 +150,7 @@ function initCalendar(setTodayAsActive = true) {
         let i = nextDays + 1;
         for (let d = 0; d < 7; d++) {
             dayCount++;
-            greyOut = availability(dayCount) ? availabilityClass : "";
-            extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${i}</div>`;
+            extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${i}</div>`;
             i++;
         }
         days += extraDays;
