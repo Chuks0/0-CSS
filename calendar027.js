@@ -230,12 +230,12 @@ function addListner() {
     });
 }
 
-// todayBtn.addEventListener("click", () => {
-//     today = new Date();
-//     month = today.getMonth();
-//     year = today.getFullYear();
-//     initCalendar();
-// });
+function todayBtn() {
+    today = new Date();
+    month = today.getMonth();
+    year = today.getFullYear();
+    initCalendar();
+}
 
 //function update events when a day is active
 // 0-6 Mon-Sun
