@@ -458,6 +458,7 @@ function dateCheck(day, i, end, e) {
 
         localStorage.setItem("timeSelectedDay", day);
         localStorage.setItem("timeSelectedTime", i);
+        console.log({ day: selectedSlot[0], i: selectedSlot[i] });
     } else {
         e.classList.add("w--redirected-checked");
         selectedSlot[0] = null;
@@ -465,6 +466,7 @@ function dateCheck(day, i, end, e) {
 
         localStorage.removeItem("timeSelectedDay");
         localStorage.removeItem("timeSelectedTime");
+        console.log({ day: selectedSlot[0], i: selectedSlot[i] });
     }
 
     if (localStorage.getItem("timeSelectedDay") != null) {
