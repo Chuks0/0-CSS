@@ -52,11 +52,7 @@ const availability = (i) => {
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
 function initCalendar(setTodayAsActive = true) {
-    const firstDay = new Date(
-        setTodayAsActive ? today.getFullYear() : year,
-        setTodayAsActive ? today.getMonth() : month,
-        setTodayAsActive ? today.getDay() : 1
-    );
+    const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const prevLastDay = new Date(year, month, 0);
     const prevDays = prevLastDay.getDate();
