@@ -35,7 +35,7 @@ const months = [
 const eventsArr = []; // fill with time slots open
 const weekSlotsArr = [];
 const selectedSlot = [];
-const timesList = [];
+let timeSelected;
 let minSetVal = 0;
 let slotDay = new Date().getDay();
 
@@ -446,9 +446,10 @@ function dateCheck(day, i, end, e) {
         else weekSlotsArr[day][j] = "a";
     }*/
     try {
-        timesList[0].classList.remove("w--redirected-checked");
+        if (e != timetimeSelectedSlot)
+            timeStimeSelectedlot.classList.remove("w--redirected-checked");
     } catch {}
-    timesList[0] = e;
+    timeStimeSelectedlot = e;
     if (e.classList.contains("w--redirected-checked")) {
         e.classList.remove("w--redirected-checked");
         selectedSlot[0] = day;
