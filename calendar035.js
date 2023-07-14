@@ -62,7 +62,7 @@ function initCalendar(setTodayAsActive = true) {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
-    coachingBtn.classList.add("disabled");
+    toggleDisable(coachingBtn, true);
     date.innerHTML = year + "." + months[month];
 
     let days = `<div class="calendar_row">`;
@@ -469,15 +469,31 @@ function dateCheck(day, i, end, e) {
 
     if (localStorage.getItem("timeSelectedDay") != null) {
         if (coachingBtn.classList.contains("disabled"))
-            coachingBtn.classList.remove("disabled");
+            toggleDisable(coachingBtn, false);
     } else {
         if (coachingBtn.classList.contains("disabled")) {
         } else {
-            coachingBtn.classList.add("disabled");
+            toggleDisable(coachingBtn, true);
         }
     }
     //console.log(JSON.stringify(weekSlotsArr));
     //console.log(minSetVal);
+}
+
+function toggleDisable(e, value) {
+    if (value) {
+        if (e.classList.contains("disabled")) {
+        } else {
+            e.classList.add("disabled");
+        }
+        e.style.pointerEvents = "none";
+    } else {
+        if (e.classList.contains("disabled")) {
+            e.classList.remove("disabled");
+        } else {
+        }
+        e.style.pointerEvents = "auto";
+    }
 }
 
 function convertTime(time) {
