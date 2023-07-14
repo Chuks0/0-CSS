@@ -9,7 +9,6 @@ const calendar = document.querySelector(".calendar"),
     // todayBtn = document.querySelector(".today-btn"),
     eventsContainer = document.querySelector(".calendar-setup-timeslot"),
     calendarDays = document.querySelectorAll(".checkbox-wrapper_day-setup"),
-    setup = document.querySelector(".calendar-setup-days"),
     setupDaysWraper = document.querySelector(".calendar-setup-days-wrapper"),
     calendarTimes = document.querySelectorAll(".checkbox-timer");
 
@@ -33,7 +32,6 @@ const months = [
     "12",
 ];
 
-setup.style.display = "none";
 const eventsArr = []; // fill with time slots open
 const weekSlotsArr = [];
 let minSetVal = 0;
