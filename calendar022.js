@@ -54,7 +54,11 @@ const availability = (i) => {
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
 function initCalendar(setTodayAsActive = true) {
-    const firstDay = new Date(year, month, 1);
+    const firstDay = new Date(
+        setTodayAsActive ? today.getFullYear() : year,
+        setTodayAsActive ? today.getMonth() : month,
+        1
+    );
     const lastDay = new Date(year, month + 1, 0);
     const prevLastDay = new Date(year, month, 0);
     const prevDays = prevLastDay.getDate();
@@ -68,11 +72,11 @@ function initCalendar(setTodayAsActive = true) {
     let dayCount = 0;
     let weekCount = 0;
     let greyOut = "";
-    let noAvailabilityClass = "grey-out"; // <----- should be another class
+    let availabilityClass = "available";
 
     for (let x = day; x > 0; x--) {
         dayCount++;
-        greyOut = availability(dayCount) ? "" : noAvailabilityClass;
+        greyOut = availability(dayCount) ? availabilityClass : "";
         days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date ${greyOut}">${
             prevDays - x + 1
         }</div>`;
@@ -86,7 +90,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let i = 1; i <= lastDate; i++) {
         dayCount++;
-        greyOut = availability(dayCount) ? "" : noAvailabilityClass;
+        greyOut = availability(dayCount) ? availabilityClass : "";
         //check if event is present on that day
         let event = false;
         eventsArr.forEach((eventObj) => {
@@ -135,7 +139,7 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let j = 1; j <= nextDays; j++) {
         dayCount++;
-        greyOut = availability(dayCount) ? "" : noAvailabilityClass;
+        greyOut = availability(dayCount) ? availabilityClass : "";
         days += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
@@ -150,7 +154,7 @@ function initCalendar(setTodayAsActive = true) {
         let i = nextDays + 1;
         for (let d = 0; d < 7; d++) {
             dayCount++;
-            greyOut = availability(dayCount) ? "" : noAvailabilityClass;
+            greyOut = availability(dayCount) ? availabilityClass : "";
             extraDays += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${i}</div>`;
             i++;
         }
