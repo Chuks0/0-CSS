@@ -55,7 +55,7 @@ function initCalendar(setTodayAsActive = true) {
     const firstDay = new Date(
         setTodayAsActive ? today.getFullYear() : year,
         setTodayAsActive ? today.getMonth() : month,
-        1
+        setTodayAsActive ? today.getDay() : 1
     );
     const lastDay = new Date(year, month + 1, 0);
     const prevLastDay = new Date(year, month, 0);
