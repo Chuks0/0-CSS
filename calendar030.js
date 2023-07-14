@@ -6,7 +6,7 @@ const calendar = document.querySelector(".calendar"),
     daysContainer = document.querySelector(".days"),
     prev = document.querySelector(".prev"),
     next = document.querySelector(".next"),
-    // todayBtn = document.querySelector(".today-btn"),
+    coachingBtn = document.querySelector(".btn-coaching"),
     eventsContainer = document.querySelector(".calendar-setup-timeslot"),
     calendarDays = document.querySelectorAll(".checkbox-wrapper_day-setup"),
     setupDaysWraper = document.querySelector(".calendar-setup-days-wrapper"),
@@ -38,6 +38,7 @@ const selectedSlot = [];
 let timeSelected;
 let minSetVal = 0;
 let slotDay = new Date().getDay();
+coachingBtn.disabled = true;
 
 calendarDays.forEach((day) => {
     day.addEventListener("click", () => openPage(day));
@@ -446,20 +447,28 @@ function dateCheck(day, i, end, e) {
         else weekSlotsArr[day][j] = "a";
     }*/
     try {
-        if (e != timetimeSelectedSlot)
-            timeStimeSelectedlot.classList.remove("w--redirected-checked");
+        if (e != timeSelected)
+            timeSelected.classList.remove("w--redirected-checked");
     } catch {}
-    timeStimeSelectedlot = e;
+    timeSelected = e;
     if (e.classList.contains("w--redirected-checked")) {
         e.classList.remove("w--redirected-checked");
         selectedSlot[0] = day;
         selectedSlot[1] = i;
+
+        localStorage.setItem("timeSelectedDay", day);
+        localStorage.setItem("timeSelectedTime", i);
     } else {
         e.classList.add("w--redirected-checked");
         selectedSlot[0] = null;
         selectedSlot[1] = null;
+
+        localStorage.removeItem("timeSelectedDay");
+        localStorage.removeItem("timeSelectedTime");
     }
 
+    coachingBtn.disabled =
+        localStorage.getItem(timeSelectedDay) != null ? false : true;
     //console.log(JSON.stringify(weekSlotsArr));
     //console.log(minSetVal);
 }
