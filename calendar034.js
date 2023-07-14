@@ -453,20 +453,18 @@ function dateCheck(day, i, end, e) {
     timeSelected = e;
     if (e.classList.contains("w--redirected-checked")) {
         e.classList.remove("w--redirected-checked");
-        selectedSlot[0] = day;
-        selectedSlot[1] = i;
-
-        localStorage.setItem("timeSelectedDay", day);
-        localStorage.setItem("timeSelectedTime", i);
-        console.log({ day: selectedSlot[0], i: selectedSlot[i] });
-    } else {
-        e.classList.add("w--redirected-checked");
         selectedSlot[0] = null;
         selectedSlot[1] = null;
 
         localStorage.removeItem("timeSelectedDay");
         localStorage.removeItem("timeSelectedTime");
-        console.log({ day: selectedSlot[0], i: selectedSlot[i] });
+    } else {
+        e.classList.add("w--redirected-checked");
+        selectedSlot[0] = day;
+        selectedSlot[1] = i;
+
+        localStorage.setItem("timeSelectedDay", day);
+        localStorage.setItem("timeSelectedTime", i);
     }
 
     if (localStorage.getItem("timeSelectedDay") != null) {
