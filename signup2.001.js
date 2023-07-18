@@ -56,6 +56,8 @@ for (let i in otplist) {
     });
 }
 
+render();
+
 username.innerText =
     localStorage.getItem("cmsname") == null
         ? null
@@ -244,8 +246,6 @@ function lastValue() {
         if (otplist[i].value === "") otplist[i].focus();
     }
 }
-
-render();
 
 function render() {
     window.recaptchaVerifier = new RecaptchaVerifier(
