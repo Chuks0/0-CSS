@@ -2,8 +2,6 @@ import {
     getAuth,
     deleteUser,
     onAuthStateChanged,
-    sendEmailVerification,
-    createUserWithEmailAndPassword,
     RecaptchaVerifier,
     signInWithPhoneNumber,
     EmailAuthProvider,
