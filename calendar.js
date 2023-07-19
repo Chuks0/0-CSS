@@ -496,8 +496,14 @@ function dateCheck(day, i, end, e) {
     }
 
     if (localStorage.getItem("timeSelectedDay") != null) {
-        if (coachingBtn.classList.contains("disabled"))
+        if (coachingBtn.classList.contains("disabled")) {
             toggleDisable(coachingBtn, false);
+            console.log(
+                `${localStorage.getItem(
+                    "timeSelectedDay"
+                )} ${localStorage.getItem("timeSelectedTime")}`
+            );
+        }
     } else {
         if (coachingBtn.classList.contains("disabled")) {
         } else {
