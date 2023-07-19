@@ -110,10 +110,20 @@ function initCalendar(setTodayAsActive = true) {
             activeDay = i;
             openPageDay(today.getDay() + 1);
             if (event) {
+                if (setTodayAsActive) {
+                    localStorage.setItem("timeSelectedYear", year);
+                    localStorage.setItem("timeSelectedMonth", month);
+                    localStorage.setItem("timeSelectedDate", i);
+                }
                 days += setTodayAsActive
                     ? `<div day="${dayCount}" class="calendar_item day today active event ${greyOut}">${i}</div>`
                     : `<div day="${dayCount}" class="calendar_item day today event ${greyOut}">${i}</div>`;
             } else {
+                if (setTodayAsActive) {
+                    localStorage.setItem("timeSelectedYear", year);
+                    localStorage.setItem("timeSelectedMonth", month);
+                    localStorage.setItem("timeSelectedDate", i);
+                }
                 days += setTodayAsActive
                     ? `<div day="${dayCount}" class="calendar_item day today active ${greyOut}">${i}</div>`
                     : `<div day="${dayCount}" class="calendar_item day today ${greyOut}">${i}</div>`;
@@ -208,7 +218,13 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
-                            console.log(`${year}/ ${month}/ ${day.value}`);
+                            console.log(`${year} ${month} ${day.innerText}`);
+                            localStorage.setItem("timeSelectedYear", year);
+                            localStorage.setItem("timeSelectedMonth", month);
+                            localStorage.setItem(
+                                "timeSelectedDate",
+                                day.innerText
+                            );
                         }
                     });
                 }, 100);
@@ -223,13 +239,22 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
-                            console.log(`${year}/ ${month}/ ${day.value}`);
+                            console.log(`${year} ${month} ${day.innerText}`);
+                            localStorage.setItem("timeSelectedYear", year);
+                            localStorage.setItem("timeSelectedMonth", month);
+                            localStorage.setItem(
+                                "timeSelectedDate",
+                                day.innerText
+                            );
                         }
                     });
                 }, 100);
             } else {
                 e.target.classList.add("active");
-                console.log(`${year}/ ${month}/ ${day.value}`);
+                console.log(`${year} ${month} ${day.innerText}`);
+                localStorage.setItem("timeSelectedYear", year);
+                localStorage.setItem("timeSelectedMonth", month);
+                localStorage.setItem("timeSelectedDate", day.innerText);
             }
             openPage(e.target);
         });
