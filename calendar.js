@@ -208,6 +208,7 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
+                            console.log(`${year}/ ${month}/ ${day.value}`);
                         }
                     });
                 }, 100);
@@ -222,11 +223,13 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
+                            console.log(`${year}/ ${month}/ ${day.value}`);
                         }
                     });
                 }, 100);
             } else {
                 e.target.classList.add("active");
+                console.log(`${year}/ ${month}/ ${day.value}`);
             }
             openPage(e.target);
         });
