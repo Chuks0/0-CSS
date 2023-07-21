@@ -71,9 +71,16 @@ function initCalendar(setTodayAsActive = true) {
     let greyOut = "";
     let availabilityClass = "available";
 
+    const todayDate = new Date();
+    const currentYear = todayDate.getFullYear();
+    const currentMonth = todayDate.getMonth();
+    const currentDay = todayDate.getDate();
+
     for (let x = day; x > 0; x--) {
         dayCount++;
-        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date">${
+        const prevDay = new Date(year, month, prevDays - x + 1);
+        greyOut = prevDay.getTime() < todayDate.getTime() ? "passed" : "";
+        days += `<div day="${dayCount}" class="calendar_item day grey-out prev-date ${greyOut}">${
             prevDays - x + 1
         }</div>`;
         if (dayCount >= 7) {
@@ -145,7 +152,9 @@ function initCalendar(setTodayAsActive = true) {
 
     for (let j = 1; j <= nextDays; j++) {
         dayCount++;
-        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date">${j}</div>`;
+        const nextDay = new Date(year, month + 1, j);
+        greyOut = nextDay.getTime() < todayDate.getTime() ? "passed" : "";
+        days += `<div day="${dayCount}" class="calendar_item day grey-out next-date ${greyOut}">${j}</div>`;
         if (dayCount >= 7) {
             weekCount++;
             dayCount = 0;
