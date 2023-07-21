@@ -1,16 +1,18 @@
 //TODO
 //only show up to 6m
 
-const calendar = document.querySelector(".calendar"),
-    date = document.querySelector(".date"),
-    daysContainer = document.querySelector(".days"),
-    prev = document.querySelector(".prev"),
-    next = document.querySelector(".next"),
-    coachingBtn = document.querySelector(".btn-coaching"),
-    eventsContainer = document.querySelector(".calendar-setup-timeslot"),
-    calendarDays = document.querySelectorAll(".checkbox-wrapper_day-setup"),
-    setupDaysWraper = document.querySelector(".calendar-setup-days-wrapper"),
-    calendarTimes = document.querySelectorAll(".checkbox-timer");
+const date = (el = document) => el.querySelector(".date"),
+    daysContainer = (el = document) => el.querySelector(".days"),
+    prev = (el = document) => el.querySelector(".prev"),
+    next = (el = document) => el.querySelector(".next"),
+    coachingBtn = (el = document) => el.querySelector(".btn-coaching"),
+    eventsContainer = (el = document) =>
+        el.querySelector(".calendar-setup-timeslot"),
+    calendarDays = (el = document) =>
+        el.querySelectorAll(".checkbox-wrapper_day-setup"),
+    setupDaysWraper = (el = document) =>
+        el.querySelector(".calendar-setup-days-wrapper"),
+    calendarTimes = (el = document) => el.querySelectorAll(".checkbox-timer");
 
 let today = new Date();
 let activeDay;
@@ -35,14 +37,15 @@ const months = [
 const eventsArr = []; // fill with time slots open
 const weekSlotsArr = [];
 const selectedSlot = [];
+const counsolerList = [];
 let timeSelected;
 let minSetVal = 0;
 let slotDay = new Date().getDay();
 
-calendarDays.forEach((day) => {
+calendarDays(counsolerList[0]).forEach((day) => {
     day.addEventListener("click", () => openPage(day));
 });
-calendarTimes.forEach((timeslot) => {
+calendarTimes(counsolerList[0]).forEach((timeslot) => {
     timeslot.addEventListener("click", () => setTimeSlot(timeslot));
 });
 
@@ -62,8 +65,8 @@ function initCalendar(setTodayAsActive = true) {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
-    toggleDisable(coachingBtn, true);
-    date.innerHTML = year + "." + months[month];
+    toggleDisable(coachingBtn(counsolerList[0]), true);
+    date(counsolerList[0]).innerHTML = year + "." + months[month];
 
     let days = `<div class="calendar_row">`;
     let dayCount = 0;
@@ -174,7 +177,7 @@ function initCalendar(setTodayAsActive = true) {
         days += extraDays;
         days += weekCount >= 6 ? "</div>" : `</div><div class="calendar_row">`;
     }
-    daysContainer.innerHTML = days;
+    daysContainer(counsolerList[0]).innerHTML = days;
     addListner();
 }
 
@@ -197,8 +200,8 @@ function nextMonth() {
     initCalendar(false);
 }
 
-prev.addEventListener("click", prevMonth);
-next.addEventListener("click", nextMonth);
+prev(counsolerList[0]).addEventListener("click", prevMonth);
+next(counsolerList[0]).addEventListener("click", nextMonth);
 
 initCalendar();
 
@@ -305,7 +308,7 @@ function updateEvents(day) {
         </div>`;
     }
 
-    eventsContainer.innerHTML = events;
+    eventsContainer(counsolerList[0]).innerHTML = events;
 }
 
 function min30(day) {
