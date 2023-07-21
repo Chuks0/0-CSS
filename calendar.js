@@ -218,7 +218,6 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
-                            console.log(`${year} ${month} ${day.innerText}`);
                             localStorage.setItem("timeSelectedYear", year);
                             localStorage.setItem("timeSelectedMonth", month);
                             localStorage.setItem(
@@ -239,7 +238,6 @@ function addListner() {
                             day.innerHTML === e.target.innerHTML
                         ) {
                             day.classList.add("active");
-                            console.log(`${year} ${month} ${day.innerText}`);
                             localStorage.setItem("timeSelectedYear", year);
                             localStorage.setItem("timeSelectedMonth", month);
                             localStorage.setItem(
@@ -251,7 +249,6 @@ function addListner() {
                 }, 100);
             } else {
                 e.target.classList.add("active");
-                console.log(`${year} ${month} ${day.innerText}`);
                 localStorage.setItem("timeSelectedYear", year);
                 localStorage.setItem("timeSelectedMonth", month);
                 localStorage.setItem("timeSelectedDate", day.innerText);
@@ -498,11 +495,6 @@ function dateCheck(day, i, end, e) {
     if (localStorage.getItem("timeSelectedDay") != null) {
         if (coachingBtn.classList.contains("disabled")) {
             toggleDisable(coachingBtn, false);
-            console.log(
-                `${localStorage.getItem(
-                    "timeSelectedDay"
-                )} ${localStorage.getItem("timeSelectedTime")}`
-            );
         }
     } else {
         if (coachingBtn.classList.contains("disabled")) {
