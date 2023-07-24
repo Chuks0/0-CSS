@@ -505,13 +505,13 @@ function dateCheck(day, i, end, e) {
     }
 
     if (localStorage.getItem("timeSelectedDay") != null) {
-        if (coachingBtn.classList.contains("disabled")) {
-            toggleDisable(coachingBtn, false);
+        if (coachingBtn(counsolerList[0]).classList.contains("disabled")) {
+            toggleDisable(coachingBtn(counsolerList[0]), false);
         }
     } else {
-        if (coachingBtn.classList.contains("disabled")) {
+        if (coachingBtn(counsolerList[0]).classList.contains("disabled")) {
         } else {
-            toggleDisable(coachingBtn, true);
+            toggleDisable(coachingBtn(counsolerList[0]), true);
         }
     }
     //console.log(JSON.stringify(weekSlotsArr));
