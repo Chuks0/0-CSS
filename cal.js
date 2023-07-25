@@ -41,6 +41,42 @@ const counsolerList = [];
 let timeSelected;
 let minSetVal = 0;
 let slotDay = new Date().getDay();
+const checkoutNumList = [];
+const subtotalNumList = [];
+document.querySelectorAll(".checkout-qty-count").forEach((el) => {
+    el.style.pointerEvents = "none";
+    checkoutNumList.push(el.firstElementChild);
+});
+document.querySelectorAll(".checkout-item-price").forEach((el) => {
+    subtotalNumList.push(el.firstElementChild);
+});
+document.querySelectorAll("minus").forEach((el) => {
+    el.addEventListener("click", () => {
+        for (let i = 0; i < checkoutNumList.length; i++) {
+            AddNumber(-1, checkoutNumList[i], i);
+        }
+    });
+});
+document.querySelectorAll("add").forEach((el) => {
+    el.addEventListener("click", () => {
+        for (let i = 0; i < checkoutNumList.length; i++) {
+            AddNumber(1, checkoutNumList[i], i);
+        }
+    });
+});
+function AddNumber(numberToAdd, element, i) {
+    let tempNum = Number(element.innerText);
+    const priceStr = subtotalNumList[i].innerText.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+    let price = parseInt(priceStr); // Convert to integer
+    if (tempNum > 1 || numberToAdd > 0) {
+        tempNum += numberToAdd;
+        if (numberToAdd > 0) price *= 2;
+        else price /= 2;
+    }
+    element.innerText = tempNum;
+    localStorage.setItem("timeSelectedAmount", tempNum);
+    subtotalNumList[i].innerText = `${price.toLocaleString()}원`;
+}
 
 calendarDays(counsolerList[0]).forEach((day) => {
     day.addEventListener("click", () => openPage(day));
