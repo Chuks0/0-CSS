@@ -44,10 +44,9 @@ let slotDay = new Date().getDay();
 const checkoutNumList = document.querySelectorAll(".checkout-qty-count");
 const subtotalNumList = document.querySelectorAll(".checkout-item-price");
 for (let i = 0; i < checkoutNumList.length; i++) {
-    console.log(subtotalNumList[i].firstElementChild);
     checkoutNumList[i].style.pointerEvents = "none";
 }
-document.querySelectorAll("minus").forEach((el) => {
+document.querySelectorAll(".minus").forEach((el) => {
     el.addEventListener("click", () => {
         for (let i = 0; i < checkoutNumList.length; i++) {
             AddNumber(-1, checkoutNumList[i].firstElementChild, i);
@@ -55,7 +54,7 @@ document.querySelectorAll("minus").forEach((el) => {
         }
     });
 });
-document.querySelectorAll("add").forEach((el) => {
+document.querySelectorAll(".add").forEach((el) => {
     el.addEventListener("click", () => {
         for (let i = 0; i < checkoutNumList.length; i++) {
             AddNumber(1, checkoutNumList[i].firstElementChild, i);
