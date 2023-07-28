@@ -73,7 +73,7 @@ function AddNumber(numberToAdd, element, i) {
         else price /= 2;
     }
     element.innerText = tempNum;
-    localStorage.setItem("timeSelectedAmount", tempNum);
+    localStorage.setItem("timeSelectedAmount", `${tempNum}`);
     subtotalNumList[
         i
     ].firstElementChild.innerText = `${price.toLocaleString()}원`;
@@ -368,10 +368,43 @@ function min30(day) {
                   ":00" +
                   (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
-        if (weekSlotsArr[day - 1][i] === "s") {
+
+        let overlapsWithEvent = eventsArr.some((event) => {
+            const eventStartTime = parseInt(event.time.split(":")[0]);
+            const eventStartMinutes = parseInt(
+                event.time.split(":")[1].split(" ")[0]
+            );
+            const eventTimeFormatter = event.time.split(" ")[1];
+
+            if (eventTimeFormatter === timeformatter) {
+                // Event and time slot are in the same format (AM/PM)
+                return (
+                    hour === eventStartTime &&
+                    ((j === 0 && eventStartMinutes < 30) ||
+                        (j === 1 && eventStartMinutes >= 30))
+                );
+            } else if (timeformatter === "AM" && eventTimeFormatter === "PM") {
+                // Time slot is in AM and event is in PM
+                return (
+                    hour === eventStartTime + 12 &&
+                    ((j === 0 && eventStartMinutes < 30) ||
+                        (j === 1 && eventStartMinutes >= 30))
+                );
+            } else if (timeformatter === "PM" && eventTimeFormatter === "AM") {
+                // Time slot is in PM and event is in AM
+                return (
+                    hour === eventStartTime - 12 &&
+                    ((j === 0 && eventStartMinutes < 30) ||
+                        (j === 1 && eventStartMinutes >= 30))
+                );
+            }
+            return false;
+        });
+
+        if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
         }
-        if (weekSlotsArr[day - 1][i] === "n") {
+        if (weekSlotsArr[day - 1][i] === "n" || overlapsWithEvent) {
             continue;
         }
         events += `<div class="w-checkbox checkbox-wrapper">
@@ -382,21 +415,16 @@ function min30(day) {
             class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
                 <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
             </div>
-        </div>
-        `;
+        </div>`;
     }
     return events;
 }
-function min60(day) {
+function min60(day, eventsArr) {
     let events = "";
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 48; i += 2) {
         let min = "00";
         let checked = "";
-        let j = i % 2;
         let hour = Math.ceil((i + 1) / 2);
-        if (j == 1) {
-            continue;
-        }
         let slotTimeTime = hour > 12 ? hour % 12 : hour;
         let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
@@ -405,82 +433,47 @@ function min60(day) {
             (slotTimeTime + 1 > 12 ? 1 : slotTimeTime + 1) +
             ":00" +
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === "s") {
-            checked = "w--redirected-checked";
-        }
-        if (weekSlotsArr[day - 1][i] === "n") {
-            continue;
-        }
-        events += `
-        <div class="w-checkbox checkbox-wrapper">
-            <div onclick="dateCheck('${day - 1}', '${i}','${i + 2}', this)"
-            id="${i}"
-            name="${slotTime}"
-            value="${i}"
-            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
-                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-            </div>
-        </div>
-        `;
-    }
-    return events;
-}
-function min90(day) {
-    let events = "";
-    let k = 0;
-    for (let i = 0; i < 48; i++) {
-        if (k != 0) {
-            k--;
-            continue;
-        }
-        k = 2;
-        let min = "00";
-        let checked = "";
-        let j = i % 2;
-        let hour = Math.ceil((i + 1) / 2);
-        if (j == 1) {
-            min = "30";
-        }
-        let slotTimeTime = hour > 12 ? hour % 12 : hour;
-        let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
-        slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
-        let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
-        let endTime =
-            j == 1
-                ? (slotTimeTime + 2 > 12 ? 2 : slotTimeTime + 2) +
-                  ":00" +
-                  (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM")
-                : slotTimeTime + 1 + ":30 " + timeformatter;
-        if (weekSlotsArr[day - 1][i] === "s") {
-            checked = "w--redirected-checked";
-        }
-        if (weekSlotsArr[day - 1][i] === "n") {
-            continue;
-        }
-        events += `
-        <div class="w-checkbox checkbox-wrapper">
-            <div onclick="dateCheck('${day - 1}', '${i}','${i + 1}', this)"
-            id="${i}"
-            name="${slotTime}"
-            value="${i}"
-            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
-                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
-            </div>
-        </div>
-        `;
-    }
-    return events;
-}
 
-function min120(day) {
-    let events = "";
-    let j = 0;
-    for (let i = 0; i < 48; i++) {
-        if (j != 0) {
-            j--;
+        // Check if the time slot overlaps with any event time
+        let overlapsWithEvent = eventsArr.some((event) => {
+            const eventStartTime = parseInt(event.time.split(":")[0]);
+            const eventTimeFormatter = event.time.split(" ")[1];
+
+            if (eventTimeFormatter === timeformatter) {
+                // Event and time slot are in the same format (AM/PM)
+                return hour === eventStartTime;
+            } else if (timeformatter === "AM" && eventTimeFormatter === "PM") {
+                // Time slot is in AM and event is in PM
+                return hour === eventStartTime + 12;
+            } else if (timeformatter === "PM" && eventTimeFormatter === "AM") {
+                // Time slot is in PM and event is in AM
+                return hour === eventStartTime - 12;
+            }
+            return false;
+        });
+
+        if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
+            checked = "w--redirected-checked";
+        }
+        if (weekSlotsArr[day - 1][i] === "n" || overlapsWithEvent) {
             continue;
         }
-        j = 3;
+
+        events += `<div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 2}', this)"
+                id="${i}"
+                name="${slotTime}"
+                value="${i}"
+                class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>`;
+    }
+    return events;
+}
+function min90(day, eventsArr) {
+    let events = "";
+    for (let i = 0; i < 48; i += 3) {
         let min = "00";
         let checked = "";
         let hour = Math.ceil((i + 1) / 2);
@@ -489,26 +482,96 @@ function min120(day) {
         slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
         let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
         let endTime =
-            (slotTimeTime + 2 > 12 ? 1 : slotTimeTime + 2) +
+            (slotTimeTime + 2 > 12 ? slotTimeTime - 10 : slotTimeTime + 2) +
             ":00" +
             (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
-        if (weekSlotsArr[day - 1][i] === "s") {
+
+        // Check if the time slot overlaps with any event time
+        let overlapsWithEvent = eventsArr.some((event) => {
+            const eventStartTime = parseInt(event.time.split(":")[0]);
+            const eventTimeFormatter = event.time.split(" ")[1];
+
+            if (eventTimeFormatter === timeformatter) {
+                // Event and time slot are in the same format (AM/PM)
+                return hour === eventStartTime;
+            } else if (timeformatter === "AM" && eventTimeFormatter === "PM") {
+                // Time slot is in AM and event is in PM
+                return hour === eventStartTime + 12;
+            } else if (timeformatter === "PM" && eventTimeFormatter === "AM") {
+                // Time slot is in PM and event is in AM
+                return hour === eventStartTime - 12;
+            }
+            return false;
+        });
+
+        if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
         }
-        if (weekSlotsArr[day - 1][i] === "n") {
+        if (weekSlotsArr[day - 1][i] === "n" || overlapsWithEvent) {
             continue;
         }
-        events += `
-        <div class="w-checkbox checkbox-wrapper">
-            <div onclick="dateCheck('${day - 1}', '${i}','${i + 4}', this)"
-            id="${i}"
-            name="${slotTime}"
-            value="${i}"
-            class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+
+        events += `<div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 3}', this)"
+                id="${i}"
+                name="${slotTime}"
+                value="${i}"
+                class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
                 <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
             </div>
-        </div>
-        `;
+        </div>`;
+    }
+    return events;
+}
+function min120(day, eventsArr) {
+    let events = "";
+    for (let i = 0; i < 48; i += 4) {
+        let min = "00";
+        let checked = "";
+        let hour = Math.ceil((i + 1) / 2);
+        let slotTimeTime = hour > 12 ? hour % 12 : hour;
+        let timeformatter = hour >= 12 && hour < 24 ? "PM" : "AM";
+        slotTimeTime = slotTimeTime == 0 ? 12 : slotTimeTime;
+        let slotTime = slotTimeTime + ":" + min + " " + timeformatter;
+        let endTime =
+            (slotTimeTime + 4 > 12 ? slotTimeTime - 8 : slotTimeTime + 4) +
+            ":00" +
+            (hour + 4 >= 12 && hour + 4 < 24 ? "PM" : "AM");
+
+        // Check if the time slot overlaps with any event time
+        let overlapsWithEvent = eventsArr.some((event) => {
+            const eventStartTime = parseInt(event.time.split(":")[0]);
+            const eventTimeFormatter = event.time.split(" ")[1];
+
+            if (eventTimeFormatter === timeformatter) {
+                // Event and time slot are in the same format (AM/PM)
+                return hour === eventStartTime;
+            } else if (timeformatter === "AM" && eventTimeFormatter === "PM") {
+                // Time slot is in AM and event is in PM
+                return hour === eventStartTime + 12;
+            } else if (timeformatter === "PM" && eventTimeFormatter === "AM") {
+                // Time slot is in PM and event is in AM
+                return hour === eventStartTime - 12;
+            }
+            return false;
+        });
+
+        if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
+            checked = "w--redirected-checked";
+        }
+        if (weekSlotsArr[day - 1][i] === "n" || overlapsWithEvent) {
+            continue;
+        }
+
+        events += `<div class="w-checkbox checkbox-wrapper">
+            <div onclick="dateCheck('${day - 1}', '${i}','${i + 4}', this)"
+                id="${i}"
+                name="${slotTime}"
+                value="${i}"
+                class="w-checkbox-input w-checkbox-input--inputType-custom checkbox-6 ${checked}">
+                <div class="checkbox-label-7 w-form-label">${slotTime} - ${endTime}</div>
+            </div>
+        </div>`;
     }
     return events;
 }

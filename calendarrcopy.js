@@ -34,7 +34,7 @@ const months = [
     "12",
 ];
 
-const eventsArr = []; // fill with time slots open
+const eventsArr = [];
 const weekSlotsArr = [];
 const selectedSlot = [];
 const counsolerList = [];
