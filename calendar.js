@@ -369,47 +369,52 @@ function min30(day) {
                   (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
 
-        let overlapsWithEvent = eventsArr.some((event) => {
-            try {
-                const eventStartTime = parseInt(event.time.split(":")[0]);
-                const eventStartMinutes = parseInt(
-                    event.time.split(":")[1].split(" ")[0]
-                );
-                const eventTimeFormatter = event.time.split(" ")[1];
+        let overlapsWithEvent =
+            eventsArr.length > 1
+                ? eventsArr.some((event) => {
+                      try {
+                          const eventStartTime = parseInt(
+                              event.time.split(":")[0]
+                          );
+                          const eventStartMinutes = parseInt(
+                              event.time.split(":")[1].split(" ")[0]
+                          );
+                          const eventTimeFormatter = event.time.split(" ")[1];
 
-                if (eventTimeFormatter === timeformatter) {
-                    // Event and time slot are in the same format (AM/PM)
-                    return (
-                        hour === eventStartTime &&
-                        ((j === 0 && eventStartMinutes < 30) ||
-                            (j === 1 && eventStartMinutes >= 30))
-                    );
-                } else if (
-                    timeformatter === "AM" &&
-                    eventTimeFormatter === "PM"
-                ) {
-                    // Time slot is in AM and event is in PM
-                    return (
-                        hour === eventStartTime + 12 &&
-                        ((j === 0 && eventStartMinutes < 30) ||
-                            (j === 1 && eventStartMinutes >= 30))
-                    );
-                } else if (
-                    timeformatter === "PM" &&
-                    eventTimeFormatter === "AM"
-                ) {
-                    // Time slot is in PM and event is in AM
-                    return (
-                        hour === eventStartTime - 12 &&
-                        ((j === 0 && eventStartMinutes < 30) ||
-                            (j === 1 && eventStartMinutes >= 30))
-                    );
-                }
-                return false;
-            } catch (e) {
-                return false;
-            }
-        });
+                          if (eventTimeFormatter === timeformatter) {
+                              // Event and time slot are in the same format (AM/PM)
+                              return (
+                                  hour === eventStartTime &&
+                                  ((j === 0 && eventStartMinutes < 30) ||
+                                      (j === 1 && eventStartMinutes >= 30))
+                              );
+                          } else if (
+                              timeformatter === "AM" &&
+                              eventTimeFormatter === "PM"
+                          ) {
+                              // Time slot is in AM and event is in PM
+                              return (
+                                  hour === eventStartTime + 12 &&
+                                  ((j === 0 && eventStartMinutes < 30) ||
+                                      (j === 1 && eventStartMinutes >= 30))
+                              );
+                          } else if (
+                              timeformatter === "PM" &&
+                              eventTimeFormatter === "AM"
+                          ) {
+                              // Time slot is in PM and event is in AM
+                              return (
+                                  hour === eventStartTime - 12 &&
+                                  ((j === 0 && eventStartMinutes < 30) ||
+                                      (j === 1 && eventStartMinutes >= 30))
+                              );
+                          }
+                          return false;
+                      } catch (e) {
+                          return false;
+                      }
+                  })
+                : false;
 
         if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
@@ -429,7 +434,7 @@ function min30(day) {
     }
     return events;
 }
-function min60(day, eventsArr) {
+function min60(day) {
     let events = "";
     for (let i = 0; i < 48; i += 2) {
         let min = "00";
@@ -445,32 +450,37 @@ function min60(day, eventsArr) {
             (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM");
 
         // Check if the time slot overlaps with any event time
-        let overlapsWithEvent = eventsArr.some((event) => {
-            try {
-                const eventStartTime = parseInt(event.time.split(":")[0]);
-                const eventTimeFormatter = event.time.split(" ")[1];
+        let overlapsWithEvent =
+            eventsArr.length > 1
+                ? eventsArr.some((event) => {
+                      try {
+                          const eventStartTime = parseInt(
+                              event.time.split(":")[0]
+                          );
+                          const eventTimeFormatter = event.time.split(" ")[1];
 
-                if (eventTimeFormatter === timeformatter) {
-                    // Event and time slot are in the same format (AM/PM)
-                    return hour === eventStartTime;
-                } else if (
-                    timeformatter === "AM" &&
-                    eventTimeFormatter === "PM"
-                ) {
-                    // Time slot is in AM and event is in PM
-                    return hour === eventStartTime + 12;
-                } else if (
-                    timeformatter === "PM" &&
-                    eventTimeFormatter === "AM"
-                ) {
-                    // Time slot is in PM and event is in AM
-                    return hour === eventStartTime - 12;
-                }
-                return false;
-            } catch (e) {
-                return false;
-            }
-        });
+                          if (eventTimeFormatter === timeformatter) {
+                              // Event and time slot are in the same format (AM/PM)
+                              return hour === eventStartTime;
+                          } else if (
+                              timeformatter === "AM" &&
+                              eventTimeFormatter === "PM"
+                          ) {
+                              // Time slot is in AM and event is in PM
+                              return hour === eventStartTime + 12;
+                          } else if (
+                              timeformatter === "PM" &&
+                              eventTimeFormatter === "AM"
+                          ) {
+                              // Time slot is in PM and event is in AM
+                              return hour === eventStartTime - 12;
+                          }
+                          return false;
+                      } catch (e) {
+                          return false;
+                      }
+                  })
+                : false;
 
         if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
@@ -491,7 +501,7 @@ function min60(day, eventsArr) {
     }
     return events;
 }
-function min90(day, eventsArr) {
+function min90(day) {
     let events = "";
     for (let i = 0; i < 48; i += 3) {
         let min = "00";
@@ -507,32 +517,37 @@ function min90(day, eventsArr) {
             (hour + 2 >= 12 && hour + 2 < 24 ? "PM" : "AM");
 
         // Check if the time slot overlaps with any event time
-        let overlapsWithEvent = eventsArr.some((event) => {
-            try {
-                const eventStartTime = parseInt(event.time.split(":")[0]);
-                const eventTimeFormatter = event.time.split(" ")[1];
+        let overlapsWithEvent =
+            eventsArr.length > 1
+                ? eventsArr.some((event) => {
+                      try {
+                          const eventStartTime = parseInt(
+                              event.time.split(":")[0]
+                          );
+                          const eventTimeFormatter = event.time.split(" ")[1];
 
-                if (eventTimeFormatter === timeformatter) {
-                    // Event and time slot are in the same format (AM/PM)
-                    return hour === eventStartTime;
-                } else if (
-                    timeformatter === "AM" &&
-                    eventTimeFormatter === "PM"
-                ) {
-                    // Time slot is in AM and event is in PM
-                    return hour === eventStartTime + 12;
-                } else if (
-                    timeformatter === "PM" &&
-                    eventTimeFormatter === "AM"
-                ) {
-                    // Time slot is in PM and event is in AM
-                    return hour === eventStartTime - 12;
-                }
-                return false;
-            } catch (e) {
-                return false;
-            }
-        });
+                          if (eventTimeFormatter === timeformatter) {
+                              // Event and time slot are in the same format (AM/PM)
+                              return hour === eventStartTime;
+                          } else if (
+                              timeformatter === "AM" &&
+                              eventTimeFormatter === "PM"
+                          ) {
+                              // Time slot is in AM and event is in PM
+                              return hour === eventStartTime + 12;
+                          } else if (
+                              timeformatter === "PM" &&
+                              eventTimeFormatter === "AM"
+                          ) {
+                              // Time slot is in PM and event is in AM
+                              return hour === eventStartTime - 12;
+                          }
+                          return false;
+                      } catch (e) {
+                          return false;
+                      }
+                  })
+                : false;
 
         if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
@@ -553,7 +568,7 @@ function min90(day, eventsArr) {
     }
     return events;
 }
-function min120(day, eventsArr) {
+function min120(day) {
     let events = "";
     for (let i = 0; i < 48; i += 4) {
         let min = "00";
@@ -569,32 +584,37 @@ function min120(day, eventsArr) {
             (hour + 4 >= 12 && hour + 4 < 24 ? "PM" : "AM");
 
         // Check if the time slot overlaps with any event time
-        let overlapsWithEvent = eventsArr.some((event) => {
-            try {
-                const eventStartTime = parseInt(event.time.split(":")[0]);
-                const eventTimeFormatter = event.time.split(" ")[1];
+        let overlapsWithEvent =
+            eventsArr.length > 1
+                ? eventsArr.some((event) => {
+                      try {
+                          const eventStartTime = parseInt(
+                              event.time.split(":")[0]
+                          );
+                          const eventTimeFormatter = event.time.split(" ")[1];
 
-                if (eventTimeFormatter === timeformatter) {
-                    // Event and time slot are in the same format (AM/PM)
-                    return hour === eventStartTime;
-                } else if (
-                    timeformatter === "AM" &&
-                    eventTimeFormatter === "PM"
-                ) {
-                    // Time slot is in AM and event is in PM
-                    return hour === eventStartTime + 12;
-                } else if (
-                    timeformatter === "PM" &&
-                    eventTimeFormatter === "AM"
-                ) {
-                    // Time slot is in PM and event is in AM
-                    return hour === eventStartTime - 12;
-                }
-                return false;
-            } catch (e) {
-                return false;
-            }
-        });
+                          if (eventTimeFormatter === timeformatter) {
+                              // Event and time slot are in the same format (AM/PM)
+                              return hour === eventStartTime;
+                          } else if (
+                              timeformatter === "AM" &&
+                              eventTimeFormatter === "PM"
+                          ) {
+                              // Time slot is in AM and event is in PM
+                              return hour === eventStartTime + 12;
+                          } else if (
+                              timeformatter === "PM" &&
+                              eventTimeFormatter === "AM"
+                          ) {
+                              // Time slot is in PM and event is in AM
+                              return hour === eventStartTime - 12;
+                          }
+                          return false;
+                      } catch (e) {
+                          return false;
+                      }
+                  })
+                : false;
 
         if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
