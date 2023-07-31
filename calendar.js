@@ -370,7 +370,7 @@ function min30(day) {
                 : slotTimeTime + ":30 " + timeformatter;
 
         let overlapsWithEvent =
-            eventsArr.length > 1
+            eventsArr.length >= 1
                 ? eventsArr.some((event) => {
                       try {
                           const eventStartTime = parseInt(
@@ -380,9 +380,12 @@ function min30(day) {
                               event.time.split(":")[1].split(" ")[0]
                           );
                           const eventTimeFormatter = event.time.split(" ")[1];
-
+                          console.log(
+                              `${eventTimeFormatter} -> ${timeformatter}`
+                          );
+                          console.log(`${eventStartMinutes} -> ${hour}`);
                           if (eventTimeFormatter === timeformatter) {
-                              // Event and time slot are in the same format (AM/PM)
+                              console.log(timeformatter);
                               return (
                                   hour === eventStartTime &&
                                   ((j === 0 && eventStartMinutes < 30) ||
@@ -451,14 +454,17 @@ function min60(day) {
 
         // Check if the time slot overlaps with any event time
         let overlapsWithEvent =
-            eventsArr.length > 1
+            eventsArr.length >= 1
                 ? eventsArr.some((event) => {
                       try {
                           const eventStartTime = parseInt(
                               event.time.split(":")[0]
                           );
                           const eventTimeFormatter = event.time.split(" ")[1];
-
+                          console.log(
+                              `${eventTimeFormatter} -> ${timeformatter}`
+                          );
+                          console.log(`${eventStartTime} -> ${hour}`);
                           if (eventTimeFormatter === timeformatter) {
                               // Event and time slot are in the same format (AM/PM)
                               return hour === eventStartTime;
@@ -518,14 +524,17 @@ function min90(day) {
 
         // Check if the time slot overlaps with any event time
         let overlapsWithEvent =
-            eventsArr.length > 1
+            eventsArr.length >= 1
                 ? eventsArr.some((event) => {
                       try {
                           const eventStartTime = parseInt(
                               event.time.split(":")[0]
                           );
                           const eventTimeFormatter = event.time.split(" ")[1];
-
+                          console.log(
+                              `${eventTimeFormatter} -> ${timeformatter}`
+                          );
+                          console.log(`${eventStartTime} -> ${hour}`);
                           if (eventTimeFormatter === timeformatter) {
                               // Event and time slot are in the same format (AM/PM)
                               return hour === eventStartTime;
@@ -585,14 +594,17 @@ function min120(day) {
 
         // Check if the time slot overlaps with any event time
         let overlapsWithEvent =
-            eventsArr.length > 1
+            eventsArr.length >= 1
                 ? eventsArr.some((event) => {
                       try {
                           const eventStartTime = parseInt(
                               event.time.split(":")[0]
                           );
                           const eventTimeFormatter = event.time.split(" ")[1];
-
+                          console.log(
+                              `${eventTimeFormatter} -> ${timeformatter}`
+                          );
+                          console.log(`${eventStartTime} -> ${hour}`);
                           if (eventTimeFormatter === timeformatter) {
                               // Event and time slot are in the same format (AM/PM)
                               return hour === eventStartTime;
