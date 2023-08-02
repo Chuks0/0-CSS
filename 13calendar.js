@@ -461,7 +461,7 @@ function min60(day) {
                 console.log(`${event.day} -> ${activeDay}`);
                 if (
                     event.day == activeDay &&
-                    event.month == month &&
+                    event.month -1 == month &&
                     event.year == year
                 )
                     for (let timeslot in event.events)
