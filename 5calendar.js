@@ -485,6 +485,7 @@ function min60(day) {
                     overlapsWithEvent = false;
                 } catch (e) {
                     overlapsWithEvent = false;
+                    console.log(e);
                 }
             }
 
