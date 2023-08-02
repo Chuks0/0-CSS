@@ -458,6 +458,7 @@ function min60(day) {
         let overlapsWithEvent = false;
         if (eventsArr.length >= 1)
             for (let event of eventsArr) {
+                console.log(`${event.day} -> ${activeDay}`)ß
                 if (event.day === activeDay)
                     for (let timeslot in event.events)
                         try {
