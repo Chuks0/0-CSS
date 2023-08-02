@@ -456,7 +456,7 @@ function min60(day) {
 
         let overlapsWithEvent =
             eventsArr.length >= 1
-                ? eventsArr.some((event) => {
+                ? eventsArr.forEach((event) => {
                       try {
                           const eventStartTime = parseInt(
                               event.events.time.split(":")[0]
