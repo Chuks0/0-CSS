@@ -455,42 +455,38 @@ function min60(day) {
 
         // Check if the time slot overlaps with any event time
 
-        let overlapsWithEvent =
-            eventsArr.length >= 1
-                ? eventsArr.forEach((event) => {
-                      console.log("hi");
-                      try {
-                          const eventStartTime = parseInt(
-                              event.events.time.split(":")[0]
-                          );
-                          const eventTimeFormatter =
-                              event.events.time.split(" ")[1];
-                          console.log(
-                              `${eventTimeFormatter} -> ${timeformatter}`
-                          );
-                          console.log(`${eventStartTime} -> ${hour}`);
-                          if (eventTimeFormatter === timeformatter) {
-                              // Event and time slot are in the same format (AM/PM)
-                              return hour === eventStartTime;
-                          } else if (
-                              timeformatter === "AM" &&
-                              eventTimeFormatter === "PM"
-                          ) {
-                              // Time slot is in AM and event is in PM
-                              return hour === eventStartTime + 12;
-                          } else if (
-                              timeformatter === "PM" &&
-                              eventTimeFormatter === "AM"
-                          ) {
-                              // Time slot is in PM and event is in AM
-                              return hour === eventStartTime - 12;
-                          }
-                          return false;
-                      } catch (e) {
-                          return false;
-                      }
-                  })
-                : false;
+        let overlapsWithEvent = false;
+        if (eventsArr.length >= 1)
+            for (let event of eventsArr) {
+                console.log("hi");
+                try {
+                    const eventStartTime = parseInt(
+                        event.events.time.split(":")[0]
+                    );
+                    const eventTimeFormatter = event.events.time.split(" ")[1];
+                    console.log(`${eventTimeFormatter} -> ${timeformatter}`);
+                    console.log(`${eventStartTime} -> ${hour}`);
+                    if (eventTimeFormatter === timeformatter) {
+                        // Event and time slot are in the same format (AM/PM)
+                        overlapsWithEvent = hour === eventStartTime;
+                    } else if (
+                        timeformatter === "AM" &&
+                        eventTimeFormatter === "PM"
+                    ) {
+                        // Time slot is in AM and event is in PM
+                        overlapsWithEvent = hour === eventStartTime + 12;
+                    } else if (
+                        timeformatter === "PM" &&
+                        eventTimeFormatter === "AM"
+                    ) {
+                        // Time slot is in PM and event is in AM
+                        overlapsWithEvent = hour === eventStartTime - 12;
+                    }
+                    overlapsWithEvent = false;
+                } catch (e) {
+                    overlapsWithEvent = false;
+                }
+            }
 
         if (weekSlotsArr[day - 1][i] === "s" && !overlapsWithEvent) {
             checked = "w--redirected-checked";
