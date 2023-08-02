@@ -368,7 +368,7 @@ function min30(day) {
                   ":00" +
                   (hour + 1 >= 12 && hour + 1 < 24 ? "PM" : "AM")
                 : slotTimeTime + ":30 " + timeformatter;
-        console.log(`${eventsArr} -> `);
+        console.log(`${eventsArr[0]} -> `);
         let overlapsWithEvent =
             eventsArr.length >= 1
                 ? eventsArr.some((event) => {
@@ -454,7 +454,7 @@ function min60(day) {
 
         // Check if the time slot overlaps with any event time
 
-        console.log(`${eventsArr} -> `);
+        console.log(`${eventsArr[0]} -> `);
         let overlapsWithEvent =
             eventsArr.length >= 1
                 ? eventsArr.some((event) => {
@@ -526,7 +526,7 @@ function min90(day) {
 
         // Check if the time slot overlaps with any event time
 
-        console.log(`${eventsArr} -> `);
+        console.log(`${eventsArr[0]} -> `);
         let overlapsWithEvent =
             eventsArr.length >= 1
                 ? eventsArr.some((event) => {
@@ -598,7 +598,7 @@ function min120(day) {
 
         // Check if the time slot overlaps with any event time
 
-        console.log(`${eventsArr} -> `);
+        console.log(`${eventsArr[0]} -> `);
         let overlapsWithEvent =
             eventsArr.length >= 1
                 ? eventsArr.some((event) => {
