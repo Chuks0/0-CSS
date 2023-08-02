@@ -459,7 +459,11 @@ function min60(day) {
         if (eventsArr.length >= 1)
             for (let event of eventsArr) {
                 console.log(`${event.day} -> ${activeDay}`);
-                if (event.day === activeDay)
+                if (
+                    event.day == activeDay &&
+                    event.month == month &&
+                    event.year == year
+                )
                     for (let timeslot in event.events)
                         try {
                             const eventStartTime = parseInt(
